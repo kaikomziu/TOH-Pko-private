@@ -49,7 +49,8 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 
-	<Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != ''">
+	<!-- [TOH-P-P] BepInEx\plugins への自動コピーは既定で無効。必要な場合のみ -p:CopyToPlugins=true を指定 -->
+	<Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != '' And '$(CopyToPlugins)' == 'true'">
 		<Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(AmongUs)/BepInEx/plugins/" />
 	</Target>
 </Project>

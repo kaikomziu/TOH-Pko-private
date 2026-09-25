@@ -20,6 +20,9 @@ namespace TownOfHost
     public class ModUpdater
     {
         private static readonly string URL = "https://api.github.com/repos/satokazoku/TownOfHost-Pko";
+        // [TOH-P-P] プライベートフォークのため、フォーク元のReleasesを参照する自動アップデートを無効化
+        // (有効のままだとフォーク元の公式dllで上書きされてしまうため)
+        public static readonly bool UpdateCheckEnabled = false;
         public static bool hasUpdate = false;
         public static bool isBroken = false;
         public static bool isChecked = false;
@@ -56,6 +59,19 @@ namespace TownOfHost
             //bool updateCheck = version != null && version.Update.Version != null;
             string url = beta ? Main.BetaBuildURL.Value : URL + "/releases" + (all ? "" : "/latest");
             if (all) url = url + "?page=1&per_page=100";
+
+            if (!UpdateCheckEnabled)
+            {
+                hasUpdate = false;
+                isBroken = false;
+                isChecked = true;
+                downloadUrl = null;
+                releases = new();
+                snapshots = new();
+                body = "このプライベートフォークでは自動アップデートは無効です。
+Auto update is disabled in this private fork.";
+                return true;
+            }
 
             //強制オプションが使用されていない & allオプションが使用されている & 既に取得済み
             if (!forced && all && releases.Any()) return true;
@@ -181,6 +197,11 @@ namespace TownOfHost
         }
         public static void StartUpdate(string url, string openurl = "")
         {
+            if (!UpdateCheckEnabled)
+            {
+                Logger.Info("プライベートフォークのため自動アップデートは無効です", "StartUpdate");
+                return;
+            }
             ShowPopup(GetString("updatePleaseWait"));
             if (!BackupDLL())
             {

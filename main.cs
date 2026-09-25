@@ -29,15 +29,15 @@ namespace TownOfHost
     {
         // == プログラム設定 / Program Config ==
         // modの名前 / Mod Name (Default: Town Of Host)
-        public static readonly string ModName = "Town Of Host-Pko";
+        public static readonly string ModName = "Town Of Host-P-P";
         // modの色 / Mod Color (Default: #00bfff)
-        public static readonly string ModColor = "#FF9631";
+        public static readonly string ModColor = "#ff8c00";
         // 公開ルームを許可する / Allow Public Room (Default: true)
-        public static readonly bool AllowPublicRoom = true;
+        public static readonly bool AllowPublicRoom = false;
         // フォークID / ForkId (Default: OriginalTOH)
-        public static readonly string ForkId = "TOH-PKO";
+        public static readonly string ForkId = "TOH-Pko-PrivateVer";
         // Discordボタンを表示するか / Show Discord Button (Default: true)
-        public static readonly bool ShowDiscordButton = true;
+        public static readonly bool ShowDiscordButton = false;
         // Discordサーバーの招待リンク / Discord Server Invite URL (Default: https://discord.gg/PQ5CrVHC25)
         public static readonly string DiscordInviteUrl = "https://discord.gg/PQ5CrVHC25";
         public static readonly string MatchmakingRelayUrl = "https://tohp-relay.oyasai0831ohyasai.workers.dev/";

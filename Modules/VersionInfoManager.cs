@@ -111,7 +111,8 @@ class VersionInfoManager
         text.gameObject.SetActive(true);
         ModInfoText = text;
 
-        if (isChecked && (version.Update?.Version != null || allversion.Update?.Version != null))
+        // [TOH-P-P] 自動アップデート無効時はフォーク元versions.jsonによる更新ボタン表示を行わない
+        if (ModUpdater.UpdateCheckEnabled && isChecked && (version.Update?.Version != null || allversion.Update?.Version != null))
         {
             if (ModUpdater.hasUpdate || version.Update?.ShowUpdateButton == true || allversion.Update?.ShowUpdateButton == true)
             {

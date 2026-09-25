@@ -1,4 +1,16 @@
-# Town Of Host-Pko
+# Town Of Host-P-P(TownOfHost-Pko プライベートフォーク)
+
+> [!Important]
+> **このリポジトリは [TownOfHost-Pko](https://github.com/satokazoku/TownOfHost-Pko) の非公式プライベートフォーク(身内専用)です。**
+> - フォーク元: https://github.com/satokazoku/TownOfHost-Pko
+> - TownOfHost-Pko 公式とは関係ありません。このフォークで起きた不具合をフォーク元(TOH-Pko)や本家 TOH / TOHK に報告しないでください。
+> - ビルド済みファイル(dll)は公開しません。GitHub Releases も使用しません。
+> - 公開ルームは建てられません(`Main.AllowPublicRoom = false`)。参加者には、使用中のModが TownOfHost-Pko の非公式プライベートフォークであることを必ず伝えてからゲームを開始してください。
+> - 変更履歴は [CHANGELOG.md](./CHANGELOG.md) を参照してください。
+
+---
+
+# Town Of Host-Pko(以下はフォーク元の README です)
 
 ## この Mod について
 
@@ -8,7 +20,6 @@
 この Mod はTOH,TOHKに役職や機能など追加したModです
 TOH-Pkoで起きたバグは本家や他MODには報告しないでまずはTOH-Pkoに報告してください。<br>
 
-また、TOH-Pkoに関する質問、バグ報告は基本、[DiscordServer](https://discord.gg/PQ5CrVHC25)でのみ受け付けております。<br>
 
 [本家TOHはこちら](https://github.com/tukasa0001/TownOfHost)<br>
 [TOHKはこちら](https://github.com/KYMario/TownOfHost-K)<br>

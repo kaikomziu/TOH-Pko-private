@@ -2,9 +2,6 @@
 
 !これは、英語版のReadmeです!<br>
 
-**DiscordServer**
-[![Discord](./Images/TownOfHostK_readme.png)](https://discord.gg/5DPqH8seFq)
-
 <p align="center"><a href="https://github.com/KYMario/TownOfHost-K/releases/"><img src="https://badgen.net/github/release/KYMario/TownOfHost-K"></a></p>
 
 # Regarding this mod
@@ -15,7 +12,6 @@ Please do not contact the official support regarding issues with this mod.<br>
 This mod adds roles, features, and other elements to TownOfHost.<br>
 If you encounter bugs in TownOfHost-K, please report them to TownOfHost-K first, not to the original game or other mods.<br>
 
-Additionally, questions and bug reports regarding TownOfHost-K are accepted on the [DiscordServer](https://discord.gg/5DPqH8seFq).<br>
 
 ## [Wiki](https://github.com/KYMario/TownOfHost-K/wiki)
 
