@@ -149,11 +149,11 @@ namespace TownOfHost
                 sb.Append("/kick 名前 … 追い出す / /ban 名前 … BAN\n");
                 sb.Append("/kf … 全員にキルフラッシュ (試合中)\n");
                 sb.Append("/fm … 会議を強制開始 / /mf … 投票を締め切る / /ms … 会議をスキップで終了\n");
+                sb.Append("/cm … 会議画面が出ていない人に会議画面を再送 (/cm ID で1人だけ・会議中)\n");
             }
             if (forHost)
             {
                 sb.Append("<b>--部屋主専用--</b>\n");
-                sb.Append("/cm … 会議画面が出ていない人に会議画面を再送 (/cm ID で1人だけ・会議中)\n");
                 sb.Append("/dis crewmate・impostor … 切断扱いで終了\n");
                 sb.Append("/s r 文 … ルール設定 / /d r … ルール削除\n");
                 sb.Append("/kc 秒 … キルクール / /stt 数 … 通常タスク数 (ロビー)\n");
@@ -170,6 +170,39 @@ namespace TownOfHost
                 sb.Append("/dgm … ゲーム終了判定の切替 / /fps … FPS計測\n");
             }
             return sb.ToString();
+        }
+        /// <summary>[TOH-P-P] 会議画面の再送。/cm で送信者と部屋主以外の全員、/cm ID で指定した1人に送る(会議中のみ)</summary>
+        private static void ResendMeeting(PlayerControl requester, string[] args)
+        {
+            if (!AmongUsClient.Instance.AmHost || requester == null) return;
+            if (!GameStates.IsMeeting)
+            {
+                SendMessage("/cm は会議中のみ使えます。", requester.PlayerId);
+                return;
+            }
+            var targets = PlayerCatch.AllPlayerControls.Where(pc => pc.PlayerId != PlayerControl.LocalPlayer.PlayerId);
+            if (args.Length > 1)
+            {
+                if (!byte.TryParse(args[1], out var id))
+                {
+                    SendMessage("使い方: /cm または /cm ID", requester.PlayerId);
+                    return;
+                }
+                targets = targets.Where(pc => pc.PlayerId == id);
+            }
+            var count = 0;
+            foreach (var target in targets.ToArray())
+            {
+                var clientId = target.GetClientId();
+                if (clientId == -1) continue;
+                CustomRpcSender.Create("StartMeeting")
+                .AutoStartRpc(ReportDeadBodyPatch.reporternetid, RpcCalls.StartMeeting, clientId)
+                .Write(ReportDeadBodyPatch.targetid)
+                .EndRpc()
+                .SendMessage();
+                count++;
+            }
+            SendMessage($"会議画面を{count}人に再送しました。", requester.PlayerId);
         }
         private const string CommandListTitle = "<#ff8c00>【コマンド一覧】</color>";
 
@@ -1862,33 +1895,11 @@ namespace TownOfHost
                         }
                         __instance.AddChat(PlayerControl.LocalPlayer, sendchatid);
                         break;
-                    // [TOH-P-P] 会議画面の再送(部屋主専用)。/cm で部屋主以外の全員、/cm ID で指定した1人に送る
+                    // [TOH-P-P] 会議画面の再送(部屋主・モデレーター)
                     case "/callmeeting":
                     case "/cm":
                         canceled = true;
-                        if (!GameStates.IsMeeting)
-                        {
-                            SendMessage("/cm は会議中のみ使えます。", PlayerControl.LocalPlayer.PlayerId);
-                            break;
-                        }
-                        {
-                            var cmTargets = PlayerCatch.AllPlayerControls.Where(pc => pc.PlayerId != PlayerControl.LocalPlayer.PlayerId);
-                            if (args.Length > 1)
-                            {
-                                if (!byte.TryParse(args[1], out var cmId)) break;
-                                cmTargets = cmTargets.Where(pc => pc.PlayerId == cmId);
-                            }
-                            foreach (var cmTarget in cmTargets.ToArray())
-                            {
-                                var cmClientId = cmTarget.GetClientId();
-                                if (cmClientId == -1) continue;
-                                CustomRpcSender.Create("StartMeeting")
-                                .AutoStartRpc(ReportDeadBodyPatch.reporternetid, RpcCalls.StartMeeting, cmClientId)
-                                .Write(ReportDeadBodyPatch.targetid)
-                                .EndRpc()
-                                .SendMessage();
-                            }
-                        }
+                        ResendMeeting(PlayerControl.LocalPlayer, args);
                         break;
                     case "/forceend":
                     case "/fe":
@@ -3236,9 +3247,14 @@ namespace TownOfHost
                     break;
                 case "/callmeeting":
                 case "/cm":
-                    // [TOH-P-P] 会議画面の再送は部屋主専用(部屋主の処理は OnSendChat 側)
+                    // [TOH-P-P] 会議画面の再送は部屋主・モデレーターのみ
                     canceled = true;
-                    SendMessage("<color=#ff0000>/cm は部屋主専用です。</color>", player.PlayerId);
+                    if (!Moderator.IsModerator(player))
+                    {
+                        SendMessage("<color=#ff0000>/cm は部屋主・モデレーター専用です。</color>", player.PlayerId);
+                        break;
+                    }
+                    ResendMeeting(player, args);
                     break;
                 default:
                     if (IsRestriction() is false)
