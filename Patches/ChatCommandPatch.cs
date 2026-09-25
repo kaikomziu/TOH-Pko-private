@@ -117,6 +117,7 @@ namespace TownOfHost
         }
 
         // [TOH-P-P] 「/cmd」だけを送ったときに表示するコマンド一覧
+        // ※コマンドを追加・変更・削除したら、必ず GetCommandListText も更新すること
         private static bool IsBareCmd(string[] args)
             => args.Length == 1 && args[0].Equals("/cmd", StringComparison.OrdinalIgnoreCase);
 
