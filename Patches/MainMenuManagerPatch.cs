@@ -183,7 +183,7 @@ namespace TownOfHost
                         updatea.name = "Update Detail";
                         updatea.gameObject.SetActive(true);
                         updatea.AnnouncementListSlider.SetActive(false);
-                        updatea.Title.text = "TOH-P " + ModUpdater.latestTitle;
+                        updatea.Title.text = "TOH-P-P " + ModUpdater.latestTitle;
                         updatea.AnnouncementBodyText.text = Regex.Replace(ModUpdater.body.Replace("#", "").Replace("**", ""), @"\[(.*?)\]\(.*?\)", "$1");
                         updatea.DateString.text = "Latest Release";
                         updatea.SubTitle.text = "";

@@ -5,6 +5,23 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-25 08:36 JST — P-P 0.1.1(ベース: TownOfHost-Pko v5.37.23.99)
+
+フォーク元 Wiki「Forkについて」のお願い(ゲーム内の TownOfHost-Pko / TOH-P 表記の変更、どの Mod か区別できるようにする)への対応。
+
+### 変更
+- タイトル画面: ロゴ下に「Town Of Host-P-P / TownOfHost-Pko 非公式プライベートフォーク」を表示(`Patches/CredentialsPatch.cs`)。ロゴ画像自体は未変更
+- ロビー: 参加時・welcome テンプレートのチャット見出しを「This Room Use "Town Of Host-P-P" (Unofficial private fork of TownOfHost-Pko)」に変更(`Patches/PlayerJoinAndLeftPatch.cs`, `Modules/TemplateManager.cs`)
+- ロビー: タイトル文字、MOD設定ボタン名を `Main.ModName` に変更(`Patches/LobbyImageDisplayPatch.cs`, `Patches/GameOptions/MenuPatch.cs`)
+- ゲーム中/終了画面: 名前下のバージョン表記・非クライアント向け表記・勝利画面の Mod 名を P-P 表記に変更(`Modules/Utils/Utils.cs`, `Modules/Utils/UtilsNotifyRoles.cs`, `Patches/CheckGameEndPatch.cs`)
+- デバッグ版の告知: 「TOH-Pko の Discord で報告」→「フォーク元には報告せず部屋主に伝える」に変更
+- `Resources/string.csv`: 表示文言中の TOH-P / TOWNOFHOST-PKO を TOH-P-P / TOWNOFHOST-P-P に置換(翻訳キーは変更なし)
+- `main.cs`: BepInPlugin の表示名を `Town Of Host-P-P` に、配信者モードの伏せ名の既定値を `Town Of Host-P-P` に(GUID は変更なし)
+- `Patches/MainMenuManagerPatch.cs`: 更新詳細ポップアップのタイトル表記を TOH-P-P に
+
+### 修正
+- `Modules/ModUpdater.cs`: 0.1.0 で文字列リテラル内に改行が入りコンパイルエラーになる箇所を修正
+
 ## 2026-09-25 08:30 JST — P-P 0.1.0(ベース: TownOfHost-Pko v5.37.23.99 / upstream `0c8b7a0f`)
 
 プライベートフォークとしての初期セットアップ。役職の追加・改造はまだ行っていません。

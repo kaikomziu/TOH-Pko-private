@@ -120,7 +120,7 @@ namespace TownOfHost
 
         static string BuildTitleText()
         {
-            const string nameText = "TownOfHost-Pko";
+            string nameText = Main.ModName;
             string versionText = $"v{Main.PluginVersion}";
 
             Color[] stops =

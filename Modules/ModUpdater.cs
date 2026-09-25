@@ -68,8 +68,7 @@ namespace TownOfHost
                 downloadUrl = null;
                 releases = new();
                 snapshots = new();
-                body = "このプライベートフォークでは自動アップデートは無効です。
-Auto update is disabled in this private fork.";
+                body = "このプライベートフォークでは自動アップデートは無効です。\nAuto update is disabled in this private fork.";
                 return true;
             }
 

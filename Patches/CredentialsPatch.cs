@@ -171,6 +171,11 @@ namespace TownOfHost
                 }
                 if (!SpecialEventText) return;
                 SpecialEventText.enabled = TitleLogoPatch.amongUsLogo != null;
+                // [TOH-P-P] タイトルロゴ下にフォーク名と非公式プライベートフォークである旨を表示
+                if (string.IsNullOrEmpty(SpecialEventText.text))
+                {
+                    SpecialEventText.text = $"<{Main.ModColor}>{Main.ModName}</color>\n<size=70%>TownOfHost-Pko 非公式プライベートフォーク / Unofficial private fork</size>";
+                }
                 if (Event.IsInitialRelease && Event.Birthday12)
                 {
                     SpecialEventText.text = $"Happy Birthday to {Main.ModName}!";
