@@ -121,58 +121,122 @@ namespace TownOfHost
         private static bool IsBareCmd(string[] args)
             => args.Length == 1 && args[0].Equals("/cmd", StringComparison.OrdinalIgnoreCase);
 
+        // 区切りごとの色(白いチャット吹き出しでも暗い背景でも読める濃さ)。コマンド名もこの色になる
+        private const string CmdColorEveryone = "#1a8cff";
+        private const string CmdColorGuesser = "#d98c00";
+        private const string CmdColorSecret = "#e0457b";
+        private const string CmdColorModerator = "#1f9e50";
+        private const string CmdColorHost = "#ff6a00";
+        private const string CmdColorDebug = "#8a5cd1";
+        private const string CmdColorNote = "#8c8c8c";
+        private static string cmdSectionColor = CmdColorEveryone;
+
+        // 本文は SendMessage 既定の 70% サイズ。見出しは大きく、補足は小さく灰色
+        private static string CmdHeader(string title, string color, string note = "")
+        {
+            cmdSectionColor = color;
+            return $"<size=90%><b><{color}>--{title}--</color></b></size>"
+                + (note == "" ? "" : $" <size=58%><{CmdColorNote}>{note}</color></size>")
+                + "\n";
+        }
+
+        private static string CmdNote(string text)
+            => $"<size=58%><{CmdColorNote}>{text}</color></size>\n";
+
+        // コマンド1行。コマンド名は区切りの色+太字、note には (試合中) などの補足
+        private static string CmdLine(string command, string desc, string note = "")
+            => $"<b><{cmdSectionColor}>{command}</color></b> {desc}"
+             + (note == "" ? "" : $" <size=58%><{CmdColorNote}>{note}</color></size>")
+             + "\n";
+
         private static string GetCommandListText(bool forHost, bool forModerator)
         {
             var sb = new StringBuilder();
-            sb.Append("※「/cmd」は省略できます(例: /n)\n");
-            sb.Append("<b>--誰でも--</b>\n");
-            sb.Append("/n … 今の設定 (/n r 役職一覧 / /n s バニラ設定 / /n w 勝利優先)\n");
-            sb.Append("/h n … 設定の説明 / /h r 役職名 … 役職の説明\n");
-            sb.Append("/m … 自分の役職 (試合中)\n");
-            sb.Append("/mi … 会議情報を再表示 (試合中)\n");
-            sb.Append("/l … 前回の試合結果 / /kl … キルログ\n");
-            sb.Append("/ach … 実績 / /rl … ルール / /news … ニュース\n");
-            sb.Append("/timer … ルームタイマー (ロビー)\n");
-            sb.Append("/tp o・/tp i … ロビーの外・中へ移動 (ロビー)\n");
-            sb.Append("/r 名前 … 名前変更 (許可時)\n");
-            sb.Append("/nc 色 … 名前の色 / /ns 数字 … 名前の大きさ\n");
-            sb.Append("/8ball … 8ball / /t 名前 … テンプレート表示\n");
-            sb.Append("<b>--ゲッサー (会議中)--</b>\n");
-            sb.Append("自投票してから /bt 役職名 (設定によっては /bt ID 役職名)\n");
-            sb.Append("<b>--秘匿チャット (試合中・対象役職のみ)--</b>\n");
-            sb.Append("/sc 陣営・相方 / /lc ラバーズ / /tc 双子・三つ子 / /cc コネクティング / /fc フリーター\n");
+            sb.Append(CmdNote("※「/cmd」は省略できます (例: /n)"));
+
+            sb.Append(CmdHeader("誰でも", CmdColorEveryone));
+            sb.Append(CmdLine("/n", "今の設定", "/n r 役職一覧・/n s バニラ設定・/n w 勝利優先"));
+            sb.Append(CmdLine("/h n", "設定の説明"));
+            sb.Append(CmdLine("/h r 役職名", "役職の説明"));
+            sb.Append(CmdLine("/m", "自分の役職", "試合中"));
+            sb.Append(CmdLine("/mi", "会議情報を再表示", "試合中"));
+            sb.Append(CmdLine("/l", "前回の試合結果"));
+            sb.Append(CmdLine("/kl", "キルログ"));
+            sb.Append(CmdLine("/ach", "実績"));
+            sb.Append(CmdLine("/rl", "ルール"));
+            sb.Append(CmdLine("/news", "ニュース"));
+            sb.Append(CmdLine("/timer", "ルームタイマー", "ロビー"));
+            sb.Append(CmdLine("/tp o・/tp i", "ロビーの外・中へ移動", "ロビー"));
+            sb.Append(CmdLine("/r 名前", "名前変更", "許可時"));
+            sb.Append(CmdLine("/nc 色", "名前の色"));
+            sb.Append(CmdLine("/ns 数字", "名前の大きさ"));
+            sb.Append(CmdLine("/8ball", "8ball"));
+            sb.Append(CmdLine("/t 名前", "テンプレート表示"));
+
+            sb.Append(CmdHeader("ゲッサー", CmdColorGuesser, "会議中"));
+            sb.Append(CmdLine("/bt 役職名", "自投票してから推測", "設定によっては /bt ID 役職名"));
+
+            sb.Append(CmdHeader("秘匿チャット", CmdColorSecret, "試合中・対象役職のみ"));
+            sb.Append(CmdLine("/sc", "陣営・相方"));
+            sb.Append(CmdLine("/lc", "ラバーズ"));
+            sb.Append(CmdLine("/tc", "双子・三つ子"));
+            sb.Append(CmdLine("/cc", "コネクティング"));
+            sb.Append(CmdLine("/fc", "フリーター"));
+
             if (forHost || forModerator)
             {
-                sb.Append("<b>--モデレーター用 (部屋主も可)--</b>\n");
-                sb.Append("/say 文 … 全員に伝言\n");
-                sb.Append("/fe … 強制廃村 / /sw 陣営・役職 … 勝者を指定して終了\n");
-                sb.Append("/start … ゲーム開始 (ロビー) / /cs … カウントダウンをリセット\n");
-                sb.Append("/kick 名前 … 追い出す / /ban 名前 … BAN\n");
-                sb.Append("/kf … 全員にキルフラッシュ (試合中)\n");
-                sb.Append("/fm … 会議を強制開始 / /mf … 投票を締め切る / /ms … 会議をスキップで終了\n");
-                sb.Append("/cm … 会議画面が出ていない人に会議画面を再送 (/cm ID で1人だけ・会議中)\n");
+                sb.Append(CmdHeader("モデレーター用", CmdColorModerator, "部屋主も可"));
+                sb.Append(CmdLine("/say 文", "全員に伝言"));
+                sb.Append(CmdLine("/fe", "強制廃村"));
+                sb.Append(CmdLine("/sw 陣営・役職", "勝者を指定して終了"));
+                sb.Append(CmdLine("/start", "ゲーム開始", "ロビー"));
+                sb.Append(CmdLine("/cs", "カウントダウンをリセット"));
+                sb.Append(CmdLine("/kick 名前", "追い出す"));
+                sb.Append(CmdLine("/ban 名前", "BAN"));
+                sb.Append(CmdLine("/kf", "全員にキルフラッシュ", "試合中"));
+                sb.Append(CmdLine("/fm", "会議を強制開始"));
+                sb.Append(CmdLine("/mf", "投票を締め切る"));
+                sb.Append(CmdLine("/ms", "会議をスキップで終了"));
+                sb.Append(CmdLine("/cm", "会議画面が出ていない人に再送", "会議中・/cm ID で1人だけ"));
             }
             if (forHost)
             {
-                sb.Append("<b>--部屋主専用--</b>\n");
-                sb.Append("/dis crewmate・impostor … 切断扱いで終了\n");
-                sb.Append("/s r 文 … ルール設定 / /d r … ルール削除\n");
-                sb.Append("/kc 秒 … キルクール / /stt 数 … 通常タスク数 (ロビー)\n");
-                sb.Append("/id … プレイヤーID一覧 / /v … 全員のModバージョン\n");
-                sb.Append("/exile ID … 追放 / /kill ID … キル (試合中)\n");
-                sb.Append("/apt … 全員を中央へ (ロビー)\n");
-                sb.Append("/mod プレイヤー … モデレーター追加・解除\n");
-                sb.Append("/aw … ホワイトリスト / /ex … 再参加キック免除\n");
-                sb.Append("/kp … 再参加者をキック / /aj … 今回だけ再参加を許可\n");
-                sb.Append("/win … 前回の勝者 / /w … 勝利履歴\n");
-                sb.Append("/mw 秒 … メッセージ間隔 / /hn 名前 … 配信用の伏せ名\n");
-                sb.Append("<b>--デバッグ用 (部屋主・デバッグモード有効時のみ)--</b>\n");
-                sb.Append("/debug … デバッグ操作 / /cr 役職 … 役職変更 / /rev … 蘇生\n");
-                sb.Append("/dgm … ゲーム終了判定の切替 / /fps … FPS計測\n");
-                sb.Append("テストボット (ローカル部屋のみ・デバッグモード不要):\n");
-                sb.Append("/bot 名前 … ダミーを追加 / /bot hide 名前 … 見えないダミーを追加\n");
-                sb.Append("/bot snr 数 … 次の開始時にダミーを追加 (最大10) / /bot snr cancel … 取消\n");
-                sb.Append("/botmark ID … その人をボット扱い / /botunmark ID … 解除 / /botclear … ダミー全削除\n");
+                sb.Append(CmdHeader("部屋主専用", CmdColorHost));
+                sb.Append(CmdLine("/dis crewmate・impostor", "切断扱いで終了"));
+                sb.Append(CmdLine("/s r 文", "ルール設定"));
+                sb.Append(CmdLine("/d r", "ルール削除"));
+                sb.Append(CmdLine("/kc 秒", "キルクール", "ロビー"));
+                sb.Append(CmdLine("/stt 数", "通常タスク数", "ロビー"));
+                sb.Append(CmdLine("/id", "プレイヤーID一覧"));
+                sb.Append(CmdLine("/v", "全員のModバージョン"));
+                sb.Append(CmdLine("/exile ID", "追放", "試合中"));
+                sb.Append(CmdLine("/kill ID", "キル", "試合中"));
+                sb.Append(CmdLine("/apt", "全員を中央へ", "ロビー"));
+                sb.Append(CmdLine("/mod プレイヤー", "モデレーター追加・解除"));
+                sb.Append(CmdLine("/aw", "ホワイトリスト"));
+                sb.Append(CmdLine("/ex", "再参加キック免除"));
+                sb.Append(CmdLine("/kp", "再参加者をキック"));
+                sb.Append(CmdLine("/aj", "今回だけ再参加を許可"));
+                sb.Append(CmdLine("/win", "前回の勝者"));
+                sb.Append(CmdLine("/w", "勝利履歴"));
+                sb.Append(CmdLine("/mw 秒", "メッセージ間隔"));
+                sb.Append(CmdLine("/hn 名前", "配信用の伏せ名"));
+
+                sb.Append(CmdHeader("デバッグ用", CmdColorDebug, "部屋主のみ"));
+                sb.Append(CmdNote("デバッグモード有効時のみ"));
+                sb.Append(CmdLine("/debug", "デバッグ操作"));
+                sb.Append(CmdLine("/cr 役職", "役職変更"));
+                sb.Append(CmdLine("/rev", "蘇生"));
+                sb.Append(CmdLine("/dgm", "ゲーム終了判定の切替"));
+                sb.Append(CmdLine("/fps", "FPS計測"));
+                sb.Append(CmdNote("テストボット (ローカル部屋のみ・デバッグモード不要)"));
+                sb.Append(CmdLine("/bot 名前", "ダミーを追加"));
+                sb.Append(CmdLine("/bot hide 名前", "見えないダミーを追加"));
+                sb.Append(CmdLine("/bot snr 数", "次の開始時にダミーを追加", "最大10"));
+                sb.Append(CmdLine("/bot snr cancel", "↑の取消"));
+                sb.Append(CmdLine("/botmark ID", "その人をボット扱い"));
+                sb.Append(CmdLine("/botunmark ID", "ボット扱いを解除"));
+                sb.Append(CmdLine("/botclear", "ダミー全削除"));
             }
             return sb.ToString();
         }
@@ -209,7 +273,7 @@ namespace TownOfHost
             }
             SendMessage($"会議画面を{count}人に再送しました。", requester.PlayerId);
         }
-        private const string CommandListTitle = "<#ff8c00>【コマンド一覧】</color>";
+        private const string CommandListTitle = "<b><#ff6a00>【コマンド一覧】</color></b>";
 
         private static bool CanUseReviveCommand(PlayerControl player)
             => DebugModeManager.EnableDebugMode.GetBool();
