@@ -116,6 +116,51 @@ namespace TownOfHost
             return true;
         }
 
+        // [TOH-P-P] 「/cmd」だけを送ったときに表示するコマンド一覧
+        private static bool IsBareCmd(string[] args)
+            => args.Length == 1 && args[0].Equals("/cmd", StringComparison.OrdinalIgnoreCase);
+
+        private static string GetCommandListText(bool forHost)
+        {
+            var sb = new StringBuilder();
+            sb.Append("※「/cmd」は省略できます(例: /n)\n");
+            sb.Append("<b>■ 誰でも</b>\n");
+            sb.Append("/n … 今の設定 (/n r 役職一覧 / /n s バニラ設定 / /n w 勝利優先)\n");
+            sb.Append("/h n … 設定の説明 / /h r 役職名 … 役職の説明\n");
+            sb.Append("/m … 自分の役職 (試合中)\n");
+            sb.Append("/mi … 会議情報を再表示 (試合中)\n");
+            sb.Append("/l … 前回の試合結果 / /kl … キルログ\n");
+            sb.Append("/ach … 実績 / /rl … ルール / /news … ニュース\n");
+            sb.Append("/timer … ルームタイマー (ロビー)\n");
+            sb.Append("/tp o・/tp i … ロビーの外・中へ移動 (ロビー)\n");
+            sb.Append("/r 名前 … 名前変更 (許可時)\n");
+            sb.Append("/nc 色 … 名前の色 / /ns 数字 … 名前の大きさ\n");
+            sb.Append("/8ball … 8ball / /t 名前 … テンプレート表示\n");
+            sb.Append("<b>■ ゲッサー (会議中)</b>\n");
+            sb.Append("自投票してから /bt 役職名 (設定によっては /bt ID 役職名)\n");
+            sb.Append("<b>■ 秘匿チャット (試合中・対象役職のみ)</b>\n");
+            sb.Append("/sc 陣営・相方 / /lc ラバーズ / /tc 双子・三つ子 / /cc コネクティング / /fc フリーター\n");
+            if (forHost)
+            {
+                sb.Append("<b>■ 部屋主のみ</b>\n");
+                sb.Append("/say 文 … 全員に伝言\n");
+                sb.Append("/fe … 強制廃村 / /sw 陣営・役職 … 勝者を指定して終了\n");
+                sb.Append("/dis crewmate・impostor … 切断扱いで終了\n");
+                sb.Append("/s r 文 … ルール設定 / /d r … ルール削除\n");
+                sb.Append("/kc 秒 … キルクール / /stt 数 … 通常タスク数 (ロビー)\n");
+                sb.Append("/id … プレイヤーID一覧 / /v … 全員のModバージョン\n");
+                sb.Append("/exile ID … 追放 / /kill ID … キル (試合中)\n");
+                sb.Append("/apt … 全員を中央へ (ロビー)\n");
+                sb.Append("/mod プレイヤー … モデレーター追加・解除\n");
+                sb.Append("/aw … ホワイトリスト / /ex … 再参加キック免除\n");
+                sb.Append("/kp … 再参加者をキック / /aj … 今回だけ再参加を許可\n");
+                sb.Append("/win … 前回の勝者 / /w … 勝利履歴\n");
+                sb.Append("/mw 秒 … メッセージ間隔 / /hn 名前 … 配信用の伏せ名\n");
+            }
+            return sb.ToString();
+        }
+        private const string CommandListTitle = "<#ff8c00>【コマンド一覧】</color>";
+
         private static bool CanUseReviveCommand(PlayerControl player)
             => DebugModeManager.EnableDebugMode.GetBool();
 
@@ -320,6 +365,16 @@ namespace TownOfHost
                 }
             }
             if (text.StartsWith("/cmd")) canceled = true;
+
+            if (IsBareCmd(args))
+            {
+                if (AmongUsClient.Instance.AmHost)
+                    SendMessage(GetCommandListText(true), PlayerControl.LocalPlayer.PlayerId, CommandListTitle);
+                else
+                    __instance.AddChat(PlayerControl.LocalPlayer, CommandListTitle + "\n<size=70%>" + GetCommandListText(false) + "</size>");
+                __instance.freeChatField.textArea.Clear();
+                return false;
+            }
 
             if (args[0] != "/cmd" || args.Length <= 1)
             {
@@ -2254,6 +2309,11 @@ namespace TownOfHost
 
             canceled = true;
 
+            if (IsBareCmd(args))
+            {
+                SendMessage(GetCommandListText(false), player.PlayerId, CommandListTitle);
+                return;
+            }
             if (args[0] != "/cmd" || args.Length <= 1) return;
             /*args = text.ToLower().Split(' ');*/
             args = args.Skip(1).ToArray();
