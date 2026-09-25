@@ -5,6 +5,12 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-25 18:05 JST — v1.0.4(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 変更
+- `/cmd` のコマンド一覧の「--デバッグ用--」にテストボットのコマンドを追加(`/bot`、`/bot hide`、`/bot snr`、`/bot snr cancel`、`/botmark`、`/botunmark`、`/botclear`)。ローカル部屋のみ・デバッグモード不要と明記
+- `main.cs`: バージョンを `1.0.3` → `1.0.4`
+
 ## 2026-09-25 18:02 JST — v1.0.3(ビルド設定のみ・Mod の中身は変更なし)
 
 ### 変更

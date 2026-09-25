@@ -169,6 +169,10 @@ namespace TownOfHost
                 sb.Append("<b>--デバッグ用 (部屋主・デバッグモード有効時のみ)--</b>\n");
                 sb.Append("/debug … デバッグ操作 / /cr 役職 … 役職変更 / /rev … 蘇生\n");
                 sb.Append("/dgm … ゲーム終了判定の切替 / /fps … FPS計測\n");
+                sb.Append("テストボット (ローカル部屋のみ・デバッグモード不要):\n");
+                sb.Append("/bot 名前 … ダミーを追加 / /bot hide 名前 … 見えないダミーを追加\n");
+                sb.Append("/bot snr 数 … 次の開始時にダミーを追加 (最大10) / /bot snr cancel … 取消\n");
+                sb.Append("/botmark ID … その人をボット扱い / /botunmark ID … 解除 / /botclear … ダミー全削除\n");
             }
             return sb.ToString();
         }
