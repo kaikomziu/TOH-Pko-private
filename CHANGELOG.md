@@ -5,6 +5,22 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-25 18:47 JST — v1.1.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加(TOH-P-P オリジナル役職)
+- **潜伏者 (Lurker)** / インポスター(`Roles/Impostor/Lurker.cs`、ConfigId 8500)
+  - ベントに潜っている間キルクールが速く進む。ベントから出た時点で「潜っていた時間 × 倍率」だけ残りキルクールを減らす(0.5秒未満の潜伏は無効)
+  - 設定: キルクール(30秒) / ベント中のキルクール進行倍率(3倍、1.5〜10倍)
+  - 残りキルクールはホスト側で「ゲーム開始10秒・会議後・自分のキル後」を起点に追跡して計算
+- **口止め屋 (Silencer)** / インポスター(`Roles/Impostor/Silencer.cs`、ConfigId 8600、シェイプシフター基盤)
+  - シェイプシフトボタンで1人を指定(変身はしない)。次の会議でその人の投票が0票になる。1会議1人まで
+  - 口止めされた本人には会議開始時に必ず通知。設定がオンなら会議開始メッセージで全員にも公表
+  - 設定: キルクール(30秒) / クールダウン(20秒) / 口止めできる回数(2回) / 口止めされた人を全員に公表する(オン)
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に Lurker / Silencer を追加
+- `Roles/Core/SimpleRoleInfo.cs`, `Modules/Utils/UtilsOption.cs`: 役職の出典に「Town Of Host-P-P」を追加
+- `Resources/string.csv`: 2役職の名前・説明・設定名・メッセージ(日本語/英語)を追加
+- `main.cs`: バージョンを `1.0.6` → `1.1.0`
+
 ## 2026-09-25 18:17 JST — v1.0.6(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 修正

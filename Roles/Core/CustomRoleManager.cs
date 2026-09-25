@@ -1203,6 +1203,9 @@ public enum CustomRoles
     Siren,
     Soulbinder,
     SoulSlave,
+    //TOH-P-P
+    Lurker,
+    Silencer,
     //DEBUG only Impostor
     //Madmate
     MadGuardian,
