@@ -40,6 +40,8 @@ namespace TownOfHost
             // ★ ダミーPC（CustomNetObject由来）はスキップ
             //    notRealPlayer=true のPCにGetLoverRoleなどを呼ぶとNullReferenceが出るため
             if (__instance.notRealPlayer) return;
+            // [TOH-P-P] /bot のテストボットは試合用の状態(通報可否など)を持たないので毎フレーム処理しない
+            if (__instance.IsTestBot()) return;
 
             if (TaskBattle.IsRTAMode && GameStates.IsInTask && GameStates.introDestroyed)
             {

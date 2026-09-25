@@ -5,6 +5,15 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-25 18:17 JST — v1.0.6(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 修正
+- ローカル部屋で `/bot` のテストボットを入れてゲーム開始すると暗転する不具合を修正(フォーク元由来)
+  - 原因: テストボットは試合用の PlayerState を持たないため、役職インスタンス生成(`CustomRoleManager.CreateInstance`)で NullReferenceException → 以降の役職処理が止まる。さらに毎フレーム処理(`FixedUpdatePatch`)で KeyNotFoundException が連発
+  - `Roles/Core/CustomRoleManager.cs`: 役職インスタンス生成でテストボットを除外
+  - `Patches/PlayerContorols/FixedUpatePatch.cs`: テストボットは毎フレーム処理をスキップ
+- `main.cs`: バージョンを `1.0.5` → `1.0.6`
+
 ## 2026-09-25 18:11 JST — v1.0.5(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 変更

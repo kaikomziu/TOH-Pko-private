@@ -773,7 +773,8 @@ CustomDeathReason deathReason = CustomDeathReason.Kill)
     }
     public static void CreateInstance()
     {
-        foreach (var pc in PlayerCatch.AllPlayerControls)
+        // [TOH-P-P] /bot のテストボットは PlayerState を持たず RoleBase 生成で NullReference → 役職処理が止まり暗転するため除外
+        foreach (var pc in PlayerCatch.AllPlayerControls.Where(pc => !pc.IsTestBot()))
         {
             CreateInstance(pc.GetCustomRole(), pc);
         }
