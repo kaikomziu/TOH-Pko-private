@@ -8,3 +8,6 @@ FodyWeavers.xsd
 .TownOfHost.proj/
 memo.md
 .wrangler/
+
+# [TOH-P-P] PC固有のビルド設定
+*.csproj.user

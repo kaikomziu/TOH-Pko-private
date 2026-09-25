@@ -49,8 +49,11 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 
-	<!-- [TOH-P-P] BepInEx\plugins への自動コピーは既定で無効。必要な場合のみ -p:CopyToPlugins=true を指定 -->
+	<!-- [TOH-P-P] BepInEx\plugins への自動コピーは CopyToPlugins=true のときだけ行う。
+	     このPCでは TownOfHost.csproj.user(git管理外)で AmongUs のパスと CopyToPlugins=true を設定している。
+	     Among Us 起動中で dll がロックされている場合はビルドを失敗させず警告だけ出す -->
 	<Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != '' And '$(CopyToPlugins)' == 'true'">
-		<Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(AmongUs)/BepInEx/plugins/" />
+		<Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(AmongUs)/BepInEx/plugins/" Retries="2" RetryDelayMilliseconds="1000" ContinueOnError="WarnAndContinue" />
+		<Message Importance="high" Text="[TOH-P-P] $(AssemblyName).dll を $(AmongUs)\BepInEx\plugins へコピーしました" Condition="'$(MSBuildLastTaskResult)' == 'true'" />
 	</Target>
 </Project>

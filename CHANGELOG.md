@@ -5,6 +5,14 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-25 18:02 JST — v1.0.3(ビルド設定のみ・Mod の中身は変更なし)
+
+### 変更
+- ビルド後に dll を `BepInEx\plugins` へ自動コピーするように変更
+  - `TownOfHost.csproj`: コピー処理を、Among Us 起動中で dll がロックされていてもビルド失敗にせず警告だけ出すように変更。コピー成功時はメッセージを表示
+  - `TownOfHost.csproj.user`(新規・git 管理外): このPCの Among Us のパス(`...\Among Us - TownOfHost-P-P`)と `CopyToPlugins=true` を設定。`dotnet build -c Release` だけで plugins まで更新される
+  - `.gitignore`: `*.csproj.user` を追加
+
 ## 2026-09-25 17:58 JST — v1.0.3(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 変更
