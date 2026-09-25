@@ -220,7 +220,9 @@ namespace TownOfHost
                         gamemodecount.TryAdd(gamemode, (count, win));
                     }
                     version = Version.Parse(age[8]);
-                    if (Main.version < version) IsOldVersion = true;
+                    // [TOH-P-P] フォーク独自のバージョン番号(1.x)は本家(5.x)より常に小さくなるため、
+                    // 本家で保存された統計を「新しいバージョンのデータ」と誤判定して統計・実績が止まらないよう比較しない
+                    // if (Main.version < version) IsOldVersion = true;
                 }
                 else
                 {

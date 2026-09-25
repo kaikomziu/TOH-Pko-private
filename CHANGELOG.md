@@ -5,6 +5,18 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-25 17:48 JST — v1.0.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+Mod のバージョン番号をフォーク独自の番号に切り替え。以後この CHANGELOG の見出しバージョン = ゲーム内表示バージョン。
+
+### 変更
+- `main.cs`: `BepInExPluginVersion` / `PluginVersion` / `PluginShowVersion` を `5.37.23.99` → `1.0.0` に変更(ゲーム内表示は v1.0.0)
+- `Modules/Statistics.cs`: 保存済み統計のバージョンが自分より新しいと統計・実績の保存を止める判定を無効化(本家 5.x で保存されたデータで誤判定しないため)
+
+### 補足
+- 部屋主と参加者のバージョン一致判定は ForkId + バージョンで行われるので、参加者も同じ v1.0.0 の dll を入れる必要がある
+- フォーク元 `versions.json` に 1.0.0 の項目は無いため、バージョン別の遠隔設定(告知・停止フラグ等)は適用されなくなる
+
 ## 2026-09-25 08:36 JST — P-P 0.1.1(ベース: TownOfHost-Pko v5.37.23.99)
 
 フォーク元 Wiki「Forkについて」のお願い(ゲーム内の TownOfHost-Pko / TOH-P 表記の変更、どの Mod か区別できるようにする)への対応。
