@@ -225,7 +225,8 @@ namespace TownOfHost
                 sb.Append(CmdHeader("デバッグ用", CmdColorDebug, "部屋主のみ"));
                 sb.Append(CmdNote("デバッグモード有効時のみ"));
                 sb.Append(CmdLine("/debug", "デバッグ操作"));
-                sb.Append(CmdLine("/cr 役職", "役職変更"));
+                sb.Append(CmdLine("/cr 役職 ID", "指定IDの人の役職を変更", "試合中・IDなしなら自分"));
+                sb.Append(CmdLine("/cr 役職", "次の試合の自分の役職を予約", "ロビー"));
                 sb.Append(CmdLine("/rev", "蘇生"));
                 sb.Append(CmdLine("/dgm", "ゲーム終了判定の切替"));
                 sb.Append(CmdLine("/fps", "FPS計測"));
