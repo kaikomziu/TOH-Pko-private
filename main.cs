@@ -40,7 +40,8 @@ namespace TownOfHost
         public static readonly bool ShowDiscordButton = false;
         // Discordサーバーの招待リンク / Discord Server Invite URL (Default: https://discord.gg/PQ5CrVHC25)
         public static readonly string DiscordInviteUrl = "https://discord.gg/PQ5CrVHC25";
-        public static readonly string MatchmakingRelayUrl = "https://tohp-relay.oyasai0831ohyasai.workers.dev/";
+        // [TOH-P-P] 身内専用のため、フォーク元のマッチメイキング中継サーバーへ部屋情報を送らない
+        public static readonly string MatchmakingRelayUrl = "none";
         public static readonly string MatchmakingRelaySecret = "6rVp2N8xK5mQ9wA1zL4jS7tB3hG0eD9Y";
         public static string PresetShareApiUrl = "https://pikeo-ai.pikeo-ai.workers.dev";
         public static string PresetShareApiSecret = "(AmongUsTOHPkoPukupuku142satokoVERYCUTE)";
@@ -61,9 +62,9 @@ namespace TownOfHost
 
         public const string PluginGuid = "com.satokazoku.TownOfHost-Pko";
 
-        public const string BepInExPluginVersion = "1.1.1";
-        public const string PluginVersion = "1.1.1";//ほんとはx.y.z表記にしたかったけどx.y.z.km.ks表記だと警告だされる
-        public const string PluginShowVersion = "1.1.1";
+        public const string BepInExPluginVersion = "1.1.2";
+        public const string PluginVersion = "1.1.2";//ほんとはx.y.z表記にしたかったけどx.y.z.km.ks表記だと警告だされる
+        public const string PluginShowVersion = "1.1.2";
         public const string ModVersion = ".23.99";//リリースver用バージョン変更dc9b79
 
         /// 配布するデバッグ版なのであればtrue。リリース時にはfalseにすること。
