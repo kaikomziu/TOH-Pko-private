@@ -19,7 +19,7 @@ public sealed class JackalStar : RoleBase
             CustomRoles.JackalStar,
             () => RoleTypes.Crewmate,
             CustomRoleTypes.Neutral,
-            50000,
+            52100,
             null,
             "jast",
             "#ffff00",

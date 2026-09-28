@@ -17,7 +17,7 @@ public sealed class Star : RoleBase
             CustomRoles.Star,
             () => RoleTypes.Crewmate,
             CustomRoleTypes.Crewmate,
-            35000,
+            35100,
             null,
             "star",
             "#ffff00",

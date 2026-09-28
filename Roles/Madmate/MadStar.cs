@@ -18,7 +18,7 @@ public sealed class MadStar : RoleBase
             CustomRoles.MadStar,
             () => RoleTypes.Crewmate,
             CustomRoleTypes.Madmate,
-            21500,
+            21800,
             null,
             "mdst",
             "#ffff00",
