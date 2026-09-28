@@ -5,6 +5,17 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-28 22:27 JST — v1.2.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加
+- **スター (Star)** / クルーメイト(`Roles/Crewmate/Star.cs`、ConfigId 35000、SuperNewRoles より)
+  - 能力なし。ゲーム開始時から全員視点で名前が黄色(#ffff00)に見える。MOD 未導入の参加者にも反映
+  - `Modules/NameColorManager.cs`: 名前の色を役職色で見せる判定(KnowTargetRoleColor)にスターを追加
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に Star を追加
+- `Resources/string.csv`: スターの名前・説明(日本語/英語)を追加
+- `README.md`: このフォークで追加した役職と出典を追記
+- `main.cs`: バージョンを `1.1.2` → `1.2.0`
+
 ## 2026-09-26 21:51 JST — v1.1.2(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 変更

@@ -1324,6 +1324,8 @@ public enum CustomRoles
     Jizo,
     Fanatic,
     Hunter,
+    //TOH-P-P
+    Star,
     //DEBUG only Crewmate
     Analyzer,
     //Neutral
