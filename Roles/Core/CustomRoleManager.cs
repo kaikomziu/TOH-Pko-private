@@ -1231,6 +1231,8 @@ public enum CustomRoles
     MadWare,
     MadPsycho,
     MadPukupuku,
+    //TOH-P-P
+    EvilStar,
     //DEBUG only Madmate
     //Crewmate(Vanilla)
     Engineer,
@@ -1395,6 +1397,8 @@ public enum CustomRoles
     Strawdoll,
     Fool,
     JackalWolf,
+    //TOH-P-P
+    JackalStar,
     TaskPlayerB,
     //TOH-P
     Chatter,

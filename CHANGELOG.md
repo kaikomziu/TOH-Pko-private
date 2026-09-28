@@ -5,6 +5,22 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-28 22:30 JST — v1.3.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加(TOH-P-P オリジナル、スターの別陣営版)
+- **イビルスター (EvilStar)** / インポスター陣営・マッドメイト扱い(`Roles/Madmate/EvilStar.cs`、ConfigId 21500)
+  - 能力なし・タスクなし。全員視点で名前が黄色。インポスター陣営の勝利で一緒に勝利。インポスターが誰かは分からない
+- **ジャッカルスター (JackalStar)** / 第三陣営・ジャッカル陣営(`Roles/Neutral/Jackal/JackalStar.cs`、ConfigId 50000)
+  - 能力なし・タスクなし。全員視点で名前が黄色。ジャッカル陣営の勝利で一緒に勝利。ジャッカルが誰かは分からない
+  - 人数による勝敗判定ではクルー側として数える(マッドメイトと同じ扱い。能力のない役職だけでジャッカル陣営が人数勝利しないように)
+  - ジャッカル系役職(ジャッカル/ジャッカルエイリアン/ジャッカルマフィア/ジャッカルウルフ/波動砲ジャッカル)が有効なときだけ配役
+  - `Patches/CheckGameEndPatch.cs`: ジャッカル陣営勝利時にジャッカルスターを勝者に追加
+- `Roles/Crewmate/Star.cs`: 名前を黄色で見せる判定をスター系3役職に拡張
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に EvilStar / JackalStar を追加
+- `Resources/string.csv`: 2役職の名前・説明(日本語/英語)を追加
+- `README.md`: 追加役職一覧を更新
+- `main.cs`: バージョンを `1.2.0` → `1.3.0`
+
 ## 2026-09-28 22:27 JST — v1.2.0(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 追加

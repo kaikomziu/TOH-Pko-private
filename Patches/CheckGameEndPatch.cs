@@ -166,6 +166,9 @@ namespace TownOfHost
                             break;
                     }
 
+                // [TOH-P-P] ジャッカル陣営勝利ならジャッカルスターも勝者に加える
+                JackalStar.AddWinnersOnJackalWin();
+
                 // 勝者固定経路でも、乗っ取りではない個人勝利条件は必ず適用する。
                 foreach (var beginner in CustomRoleManager.AllActiveRoles.Values.OfType<BeginnerImpostor>())
                     beginner.EnforceDummyKillWinRequirement();

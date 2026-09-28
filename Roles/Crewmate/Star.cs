@@ -31,7 +31,7 @@ public sealed class Star : RoleBase
     )
     { }
 
-    /// <summary>全員視点でスターの名前を役職色(黄色)で表示する。NameColorManager から呼ばれる</summary>
+    /// <summary>全員視点でスター系(スター・イビルスター・ジャッカルスター)の名前を役職色(黄色)で表示する。NameColorManager から呼ばれる</summary>
     public static bool KnowTargetRoleColor(PlayerControl target)
-        => target.Is(CustomRoles.Star);
+        => target.Is(CustomRoles.Star) || target.Is(CustomRoles.EvilStar) || target.Is(CustomRoles.JackalStar);
 }
