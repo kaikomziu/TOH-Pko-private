@@ -1232,7 +1232,7 @@ public enum CustomRoles
     MadPsycho,
     MadPukupuku,
     //TOH-P-P
-    EvilStar,
+    MadStar,
     //DEBUG only Madmate
     //Crewmate(Vanilla)
     Engineer,

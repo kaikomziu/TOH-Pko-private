@@ -5,6 +5,12 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-28 22:31 JST — v1.3.1(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 変更
+- 「イビルスター」の名前を「**マッドスター**」(Mad Star)に変更。内部名も EvilStar → MadStar、ファイルを `Roles/Madmate/MadStar.cs` に。ConfigId(21500)は変更なしなので設定は引き継がれる
+- `main.cs`: バージョンを `1.3.0` → `1.3.1`
+
 ## 2026-09-28 22:30 JST — v1.3.0(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 追加(TOH-P-P オリジナル、スターの別陣営版)
