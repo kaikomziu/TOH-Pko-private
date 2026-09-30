@@ -26,11 +26,7 @@ public sealed class Soulbinder : RoleBase, IImpostor
             127100,
             SetupOptionItem,
             "slb",
-            OptionSort: (7, 12)//,
-            /*assignInfo: new RoleAssignInfo(CustomRoles.Soulbinder, CustomRoleTypes.Impostor)
-            {
-                AssignCountRule = new(1, 1, 1)
-            }*/
+            OptionSort: (7, 12)
         );
 
     public Soulbinder(PlayerControl player)
@@ -72,11 +68,14 @@ public sealed class Soulbinder : RoleBase, IImpostor
 
     static void SetupOptionItem()
     {
+        ObjectOptionitem.Create(RoleInfo, 9, "Soulbinder", true, null).SetOptionName(() => "Soulbinder Setting").SetColor(RoleInfo.RoleColor);
         OptionKillCooldown = FloatOptionItem.Create(RoleInfo, 10, GeneralOption.KillCooldown, new(0f, 180f, 2.5f), 35f, false)
-            . SetValueFormat(OptionFormat.Seconds);
-        OptionMinKillCool = FloatOptionItem.Create(RoleInfo, 11, OptionName.HateKillerMinimumKillCool, new(0f, 180f, 2.5f), 20f, false)
             .SetValueFormat(OptionFormat.Seconds);
-        OptionDecreaseKillCool = FloatOptionItem.Create(RoleInfo, 12, OptionName.SoulbinderDecreaseKillCool, new(0.5f, 180f, 0.5f), 1f, false)
+        OptionMinKillCool = FloatOptionItem.Create(RoleInfo, 12, OptionName.HateKillerMinimumKillCool, new(0f, 180f, 2.5f), 20f, false)
+            .SetValueFormat(OptionFormat.Seconds);
+
+        ObjectOptionitem.Create(RoleInfo, 18, "Soulbinder", true, null).SetOptionName(() => "SoulSlave Setting").SetColor(SoulSlave.RoleInfo.RoleColor);
+        OptionDecreaseKillCool = FloatOptionItem.Create(RoleInfo, 11, OptionName.SoulbinderDecreaseKillCool, new(0.5f, 180f, 0.5f), 1f, false)
             .SetValueFormat(OptionFormat.Seconds);
         OptionSlaveAngelCool = FloatOptionItem.Create(RoleInfo, 13, OptionName.SoulbinderSlaveAngelCool, new(0.5f, 180f, 0.5f), 35f, false)
             .SetValueFormat(OptionFormat.Seconds);
@@ -129,12 +128,14 @@ public sealed class Soulbinder : RoleBase, IImpostor
     }
     public void CreateArrow(PlayerControl target)
     {
+        if (Arrow is not "") return;
         TargetArrow.Add(Player.PlayerId, target.PlayerId);
 
         _ = new LateTask(() =>
         {
             Logger.Info($"{TargetArrow.GetArrows(Player, target.PlayerId)}", "Soulbinder");
             Arrow = TargetArrow.GetArrows(Player, target.PlayerId);
+            UtilsNotifyRoles.NotifyRoles(OnlyMeName: true, SpecifySeer: Player);
             Logger.Info($"{Arrow}", "Soulbinder");
         }, 0.2f, "Soulbinder.RemoveArrow", true);
         _ = new LateTask(() =>
@@ -142,7 +143,6 @@ public sealed class Soulbinder : RoleBase, IImpostor
             TargetArrow.Remove(target.PlayerId, Player.PlayerId);
         }, 0.5f, "Soulbinder.RemoveArrow", true);
 
-        UtilsNotifyRoles.NotifyRoles(OnlyMeName: true, SpecifySeer: Player);
         _ = new LateTask(() =>
         {
             Arrow = "";

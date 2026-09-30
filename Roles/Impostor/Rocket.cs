@@ -1,4 +1,3 @@
-/*
 using System.Collections.Generic;
 using System.Linq;
 using AmongUs.GameOptions;
@@ -88,7 +87,7 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
 
     [Attributes.GameModuleInitializer]
     public static void Init() => GrabbedPlayerIds.Clear();
-
+    Vector3 pos;
     public override void Add()
     {
         killCDOverride = InitialGrabCooldown;
@@ -147,15 +146,15 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
 
     void SetAppearsAsImpostorForRocket(PlayerControl target, bool asImpostor)
     {
-        if (!AmongUsClient.Instance.AmHost) return;
-        if (Player.AmOwner) return;
+        //if (!AmongUsClient.Instance.AmHost) return;
+        //if (Player.AmOwner) return;
 
-        var fakeRole = asImpostor ? RoleTypes.Impostor : target.Data.RoleType;
+        /*var fakeRole = asImpostor ? RoleTypes.Impostor : target.Data.RoleType;
         var writer = AmongUsClient.Instance.StartRpcImmediately(
             target.NetId, (byte)RpcCalls.SetRole, SendOption.Reliable, Player.OwnerId);
         writer.Write((ushort)fakeRole);
         writer.Write(true);
-        AmongUsClient.Instance.FinishRpcImmediately(writer);
+        AmongUsClient.Instance.FinishRpcImmediately(writer);*/
     }
 
     void ReleasePlayer(PlayerControl target)
@@ -192,7 +191,7 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
         ResetCooldown = false;
 
         if (!Player.IsAlive()) return;
-
+        PlayFireSoundRPC();
         if (AmongUsClient.Instance.AmHost)
         {
             ExecuteLaunch();
@@ -323,20 +322,20 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
 
         snapFrame++;
         if (snapFrame % 3 != 0) return;
-
-        var myPos = Player.GetTruePosition();
         foreach (var grabbed in GrabbedPlayers.ToArray())
         {
             if (grabbed == null || !grabbed.IsAlive()) continue;
-            if (grabbed.MyPhysics.Animations.IsPlayingAnyLadderAnimation()) continue;
-            var sId = grabbed.NetTransform.lastSequenceId + 5;
-            ushort sid = (ushort)(grabbed.NetTransform.lastSequenceId + 2U);
-            grabbed.NetTransform.SnapTo(Player.transform.position, (ushort)sId);
-            var writer = AmongUsClient.Instance.StartRpcImmediately(
-                grabbed.NetTransform.NetId, (byte)RpcCalls.SnapTo, SendOption.Reliable);
-            NetHelpers.WriteVector2(myPos, writer);
-            writer.Write(sid);
-            AmongUsClient.Instance.FinishRpcImmediately(writer);
+
+            pos = Player.transform.position;
+            if (Player.cosmetics.FlipX)
+            {
+                pos.x = pos.x + 1.25f;
+            }
+            else
+            {
+                pos.x = pos.x - 1.25f;
+            }
+            grabbed.RpcSnapToForced(pos);
         }
     }
 
@@ -376,6 +375,7 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
         {
             if (Player.IsAlive())
             {
+                PlayFireSoundRPC();
                 if (AmongUsClient.Instance.AmHost)
                 {
                     ExecuteLaunch();
@@ -466,7 +466,15 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
         sender.Writer.Write(launchPending);
         sender.Writer.Write(killCDOverride);
     }
-
+    void PlayFireSoundRPC()
+    {
+        if (Player.AmOwner)
+        {
+            CustomSound.Play(CustomSound.Firework);
+        }
+        using var sender = CreateSender();
+        sender.Writer.Write((byte)3);
+    }
     public override void ReceiveRPC(MessageReader reader)
     {
         byte rpcType = reader.ReadByte();
@@ -482,6 +490,7 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
         }
         else if (rpcType == 1)
         {
+            CustomSound.Play(CustomSound.Firework);
             if (!AmongUsClient.Instance.AmHost) return;
             ExecuteLaunch();
         }
@@ -504,6 +513,10 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
             launchPending = reader.ReadBoolean();
             killCDOverride = reader.ReadSingle();
         }
+        else if (rpcType == 3)
+        {
+            CustomSound.Play(CustomSound.Firework);
+        }
     }
 
     public override string GetAbilityButtonText() =>
@@ -521,4 +534,3 @@ public sealed class Rocket : RoleBase, IImpostor, IUsePhantomButton
         return true;
     }
 }
-*/

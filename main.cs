@@ -166,7 +166,7 @@ namespace TownOfHost
         public static bool ShowRoleIntro;
         public static bool DontGameSet;
         public static bool CanUseAbility;
-        public static CustomRoles HostRole = CustomRoles.NotAssigned;
+        public static Dictionary<byte, CustomRoles> ChangeRoles = new();
 
         /// <summary>
         /// 基本的に速度の代入は禁止.スピードは増減で対応してください.
@@ -444,6 +444,10 @@ namespace TownOfHost
         Sacrifice,
         Bloodloss,
         Drowning,
+        /// <summary>
+        /// 魔術師用
+        /// </summary>
+        MagicC,
         etc = -1
     }
     //WinData
@@ -522,6 +526,7 @@ namespace TownOfHost
         Vanity = CustomRoles.Vanity,
         HASTroll = CustomRoles.HASTroll,
         TaskPlayerB = CustomRoles.TaskPlayerB,
+        Moira = CustomRoles.Moira,
         SuddenDeathRed = 1000, SuddenDeathBlue = 1001, SuddenDeathYellow = 1002, SuddenDeathGreen = 1003, SuddenDeathPurple = 1004
     }
     /*public enum CustomRoles : byte

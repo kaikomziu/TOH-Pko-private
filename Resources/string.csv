@@ -105,6 +105,7 @@
 "Siren","Siren","セイレーン"
 "Soulbinder","Soul binder","ソウルバインダー"
 "SoulSlave","Soul Slave","ソウルスレイブ"
+"Juggler","Juggler","ジャグラー"
 "#ImpostorName"
 
 "# マッドメイト系役職"
@@ -232,6 +233,10 @@
 "Fanatic","Fanatic","盲信者"
 "Hunter","Hunter","ハンター","猎人"
 "Gatekeeper","Gatekeeper","ゲートキーパー","守门人","守門人","Страж Врат","Guardião do Portão","Guardião do Portão"
+"Stray","The Stray","迷者"
+"Hero","Hero","英雄"
+"Sinner","Sinner","罪人"
+"Mourner","Mourner","弔人"
 "#CrewmateName"
 
 "# ニュートラル役職"
@@ -325,6 +330,7 @@
 "Dracula","Dracula","ドラキュラ"
 "Kenzoku","Servant","眷属"
 "DollBetrayer","Doll Betlayer","ドールベトレイヤー"
+"Moira","Moira","モイラ"
 "#NeutralName"
 
 "#コンビネーション役職"
@@ -345,7 +351,6 @@
 "Abuser","Abuser","加虐者"
 "Victim","Victim","被虐者"
 "AbuserandVictim","Abuser and Victim","<#8f1d2c>加虐者</color><#ffffff>と</color><#6f8fa8>被虐者</color>"
-
 
 "# HideAndSeek"
 "HASFox","Fox","狐","狐狸","狐妖","Лис","Raposa","Raposa"
@@ -540,6 +545,8 @@
 "SirenInfo","Drawn by a beautiful singing voice...","美しい歌声に誘われて..."
 "SoulbinderInfo","Bind the soul and enslave it","魂を縛りつけ隷属させよ"
 "SoulSlaveInfo","Those Whose Souls Are Bound","魂を縛られし者"
+"ConjurerInfo","Encirclement that extinguishes all lights","灯火吹き消す包囲陣"
+"JugglerInfo","Shuffle to shake up the board","シャッフルで盤面をかき乱せ"
 "#ImpostorInfo"
 
 "# マッドメイト系役職"
@@ -666,6 +673,10 @@
 "FanaticInfo","Believing in a False Lord","偽りの主を信じて"
 "HunterInfo","Let's kill the suspicious person","怪しい人を斬ろう","让我们杀死可疑的人"
 "GatekeeperInfo","Let's start the patrol!","見回り開始！"
+"StrayInfo","I want to become someone...","何者かになりたくて..."
+"HeroInfo","To Uphold Justice","正義を果たす為に"
+"SinnerInfo","To Bear the Guilt","罪を背負う為に"
+"MournerInfo","To Mourn a Life","命を悼む為に"
 "#CrewmateInfo"
 
 "# ニュートラル役職"
@@ -761,6 +772,7 @@
 "VanityInfo","What the Gratest Power!","あなたの正義でありたい"
 "DollBetrayerInfo","Good work, guys—you're just pawns.","ご苦労様、貴方達は捨て駒だから"
 "DraculaInfo","I can't live unless I drink blood...","血を飲まなければ生きていけない..."
+"MoiraInfo","Fate is in my hands!","運命は私の手の中に！"
 "#NeutralInfo"
 
 "# HideAndSeek"
@@ -922,6 +934,11 @@
 "WhitesharkInfoLong","If you stand still, the suicide timer builds up, and when the suicide timer runs out, you die. \nThe suicide timer does not advance while you are inside a vent. \nThe suicide timer is displayed during the Phantom Button's cooldown.","止まっていると自殺タイマーが溜まり、自殺タイマーがなくなると死んでしまう。\nベントに入っている間は自殺タイマーは進まない。\n自殺タイマーはファントムボタンのクールダウンで表示。"
 "HateKillerInfoLong","For each vote cast for you during a meeting, Killcool decreases by the set amount for one turn.","会議で自身に投票された票数1票につき、1ターンだけキルクールが設定値だけ減少する。"
 "SirenInfoLong","Select a target on the Shape Shift screen. \nNo transformation occurs. \nThe room where the Siren was located at the time the target was selected is designated as the room the target must reach. \nIf the target does not reach that room within a certain amount of time, they die. \nThis ability can only be used once per turn and cannot be used during a power outage.","シェイプシフト画面で対象を選ぶ。\n変身は行われない。\n対象選択時セイレーンがいた部屋を、対象の向かうべき部屋として指定する。\n一定時間以内に部屋に辿り着かなかった場合、対象は死亡する。\nこの能力は一ターンに一度しか使えず、停電中は使用できない。"
+"SoulbinderInfoLong","The player who makes the first kill becomes a <#ff1919>Soul Slave</color>.","最初にキルしたプレイヤーの役職が<#ff1919>ソウルスレイブ</color>になる。"
+"SoulSlaveInfoLong","Ghost role created by the <#ff1919>Soul Binder</color>\nThe original victory condition is removed, and tasks are redistributed.\nEach time a task is completed, the kill cooldown of the <#ff1919>Soul Binder</color> who killed the player is reduced by the set value. \nWhen you press the Guardian Angel button, an arrow appears from the <#ff1919>Soul Binder</color>’s perspective pointing at the target for a certain amount of time, but once the direction is set, it does not change.","<#ff1919>ソウルバインダー</color>により作成された幽霊役職\n元の勝利条件は消え、タスクが再配布される。\nタスクを一つ完了するごとに自身をキルした<#ff1919>ソウルバインダー</color>のキルクールが設定値短縮される。\n守護天使ボタンを押すと押した対象に<#ff1919>ソウルバインダー</color>視点で一定時間矢印が表示されるが、一度方向を指示した後は方向は変わらない。"
+"ConjurerInfoLong","Use the Phantom Button to place beacons. \nIf you press the Phantom Button after placing three beacons, it will kill all players within the triangular area formed by the three beacons. \nYou cannot perform normal kills.","ファントムボタンを使用してビーコンを設置する。\nビーコンを三つ設置した状態でファントムボタンを押すと、三つのビーコンを結んでできる三角形の範囲内にいるプレイヤーを全てキルする。\n通常キルを行うことはできない。"
+"JugglerInfoLong","When you press the Phantom Button, everyone's appearance is shuffled for a certain amount of time. \nPlayers who are currently shape-shifting will not have their appearance changed.","ファントムボタンを押すと、一定時間全員の姿がシャッフルされる。\nシェイプシフト中のプレイヤーの姿は変わらない。"
+
 "#ImpostorInfoLong"
 
 "# マッドメイト系役職"
@@ -1049,6 +1066,7 @@
 "FanaticInfoLong","This role is a Crewmate but believes themselves to be a Madmate. \nThis role’s tasks are not included in the victory conditions for Crewmates. \nIf “Misconception” is enabled, the names of a random number of players equal to the number of Impostors will turn red. \nIf there are fewer than three Impostors, \n“The first faction targeted by the misconception,” “The second faction targeted by the misconception,” and “The third faction targeted by the misconception” \nwill be randomly selected to match the number of Impostors.","この役職はクルーメイトでありながら自身をマッドメイトと思い込みます。\nこの役職のタスクはクルーメイトのタスク勝利判定に含まれません。\n「思い込むか」がオンの場合、インポスターの数だけ指定陣営の人のうちランダムな人の名前が赤くなります。\nインポスターが三人に満たない場合は、\n「一人目の思い込み対象陣営」、「二人目の思い込み対象陣営」、「三人目の思い込み対象陣営」\nのうちインポスター数だけ陣営がランダムに選ばれます。"
 "HunterInfoLong","The Hunter can kill any player. You can switch between Task Mode and Hunter Mode by petting your pet. \nThe Hunter's killing ability cannot be used while in Task Mode. \nYou cannot perform tasks while in Hunter Mode.","ハンターはすべてのプレイヤーを殺すことができる。ペットを撫でることでタスクモードとハンターモードを切り替えることが出来る。\nタスクモード中にはハンターのキル能力が使用できない。\nハンターモードではタスクが行えない。"
 "GatekeeperInfoLong","","ベントに入ると警戒状態になり、入った部屋を警備する。\n警備中の部屋で死体が発生するとノイズメーカーのノイズが発生する。\nノイズが発生している状態でベントに入ることで最初警戒状態になった時に入ったベントに瞬間移動する。\n警戒する部屋は毎ターンリセットされ、ベント移動はできない"
+"MournerInfoLong","If the match ends before the Mourner has completed their task, the Mourner cannot win as part of the Crewmates' faction. \nThe Mourner's task is not included in the Crewmates' tasks. \nAdditionally, when a body is reported, you can see the role of the player who reported it.","タスクを終えていない状態で試合が終了した場合、弔人はクルーメイト陣営として勝利することができない。\n弔人のタスクはクルーメイトのタスクには含まれない。\nまた、死体を通報すると通報したプレイヤーの役職を見ることができる。"
 "#CrewmateInfoLong"
 
 "# ニュートラル役職"
@@ -1129,6 +1147,7 @@
 "VanityInfoLong","Although he believes himself to be the Sheriff, he does not accidentally shoot anyone. \nIf he has never killed a Crew member, he can earn an additional victory by joining the Crew. \nThe victory conditions for killing a Crew member vary depending on the settings.","自身をシェリフと思い込んでいるが、誤爆はしない。\nクルー陣営を一度もキルしていない場合クルー陣営と追加勝利できる。\nクルー陣営をキルした場合の勝利条件は設定によって変わる。"
 "DollBetrayerInfoLong","Sides with the Jackal team.\n Possesses the ability to kill an Jackal after completing all tasks.\nWhen the Jackal is killed, the role changes to Betrayer, gaining the ability to kill anyone.\nUpon becoming a Betrayer, the win condition changes to:\n“All harmful killing roles are dead, and the number of surviving Betrayers is equal to or greater than the number of Crewmates.”","ジャッカル陣営の味方をする。\n全てのタスクを完了させるとジャッカルをキルできる能力を持つ。\n\nジャッカルをキルすると、役職がベトレイヤーに変化し、全員を殺すことができるようになる。\nベトレイヤーになると勝利条件が\n「有害なキル役職が死亡しており、生き残っているベトレイヤーの人数がクルーと同じかそれ以上」に変化する。"
 "DraculaInfoLong","Using the Kill Button causes you to “suck blood” from the player who used it. \nIf you do not suck blood for a certain amount of time, you will die. \nA player who has had their blood sucked has a certain probability of dying. This probability increases by a fixed amount each time. Additionally, there is a certain probability that they will become a minion. \nA player who dies from having their blood sucked does not become a minion. \nUpon becoming a minion, the player loses their original victory condition, and their new victory condition becomes Dracula’s victory.\nIf Dracula dies, the minions also die.\nYou cannot use Bloodsucking on minions.\nVictory is achieved when the total number of Dracula and minions is more than half the number of survivors, and all remaining survivors have harmless roles (count = Crewmates).","キルボタンを使用することで使用したプレイヤーに対して「吸血」を行う。\n吸血を一定時間行わないと死亡してしまう。\n吸血されたプレイヤーは一定確率で死亡する。この確率は一定値ずつ上昇する。また、一定確率で眷属になる。\n吸血で死亡したプレイヤーは眷属にはならない。\n眷属になると元の勝利条件を失い、勝利条件はドラキュラの勝利になる。\nドラキュラが死亡すると眷属も死亡する。\n眷属に対して吸血は使用できない。\nドラキュラと眷属の総数が生存者の半数以上かつ、他の生存者が無害(カウント=クルーメイト)な役職になると勝利。"
+"MoiraInfoLong","Moira can alter the fates of others by swapping two players' roles.\n\nDuring a meeting, self-vote to enter [Fate Change Mode].\nThen vote for your 1st target, then vote for your 2nd target.\nAt the end of the meeting, the two targets will have their roles swapped.\n\nYou have a limited number of swaps.\nOnce all swaps are used, your identity is revealed to everyone.\nIf you survive to the end after using all your swaps, you win!\n\nSwapped roles are permanent — they are NOT reverted even if Moira dies.\n\nIf [Swap Votes] is ON:\nVotes cast on your two targets will be counted for the other target instead.","モイラは2人のプレイヤーの役職を入れ替えることができる。\n\n会議中に自分自身に投票すると【運命改変モード】に入る。\n次に1人目のターゲットに投票し、さらに2人目のターゲットに投票する。\n会議終了時に、その2人の役職が入れ替わる。\n\n改変回数には上限がある。\n全ての改変を使い切ると、モイラの正体が全員に公開される。\n全改変を使い切り、試合終了後に生存していると単独勝利！ない。"
 "#NeutralInfoLong"
 
 "# ImpostorDescInfos"
@@ -1184,8 +1203,13 @@
 "SheriffDescMisfireKillsTarget","After killing the target","相手を殺した後"
 "SheriffDescCanKillNeutralOption","Some Neutrals","一部ニュートラル"
 "HunterDescTaskMode","The Hunter can kill any player. You can switch between Task Mode and Hunter Mode by petting your pet. \nThe Hunter's killing ability cannot be used while in Task Mode. \nYou cannot perform tasks while in Hunter Mode.\n","ハンターはすべてのプレイヤーを殺すことができる。ペットを撫でることでタスクモードとハンターモードを切り替えることが出来る。\nタスクモード中にはハンターのキル能力が使用できない。\nハンターモードではタスクが行えない。\n"
-"HunterDescNotask","The Hunter can kill any player.\n{","ハンターはすべてのプレイヤーを殺すことができる。タスクはない。\n"
+"HunterDescNotask","The Hunter can kill any player.\n","ハンターはすべてのプレイヤーを殺すことができる。タスクはない。\n"
 "HunterMark","<b>When you kill an imposter, a “◎” appears next to their name for a certain amount of time, and\nwhen you kill a neutral, a “▽” appears next to their name for a certain amount of time.</b>","<b>インポスターをキルした場合、名前の横に「◎」が一定時間表示され、\nニュートラルをキルした場合、名前の横に「▽」が一定時間表示される。</b>"
+"StrayDesc","As a Crew member, you can kill all players. \nHowever, you can only make <b>{0}</b> kills. \nOnce you’ve used up all your kills, if you haven’t killed any crew members, you become a <#ffd700>Hero</color>;\nif you’ve killed even one crew member, you become a <#4d0505>Sinner</color>.\nAdditionally, if the set number of crew members dies before you use up all your kills, you become a <#5f7285>Mourner</color>.","クルーだが全てのプレイヤーを殺すことができる。\nただし、<b>{0}</b>回しかキルできない。\nキル回数を使い切ると、クルーを一度もキルしていない場合は<#ffd700>英雄</color>に、\nクルーを一人でもキルしていた場合は<#4d0505>罪人</color>になる。\nまた、キル回数を使い切る前にクルーが設定数死亡した場合は<#5f7285>弔人</color>になる。"
+"HeroDesc1","If the match ends before a hero has completed their task, that hero cannot win as part of the Crewmates' faction. \nA hero's task is not included in the Crewmates' tasks. \nUpon death, the hero's role is revealed to everyone."","タスクを終えていない状態で試合が終了した場合、英雄はクルーメイト陣営として勝利することができない。\n英雄のタスクはクルーメイトのタスクには含まれない。\n死亡時全員に自身の役職が公開される。"
+"HeroDesc2","If the match ends before the hero has completed their task, the hero cannot win as part of the Crewmates' faction. \nThe hero's task is not included in the Crewmates' tasks. \nUpon death, a kill flash visible to everyone appears, and the hero's role is revealed to all players.","タスクを終えていない状態で試合が終了した場合、英雄はクルーメイト陣営として勝利することができない。\n英雄のタスクはクルーメイトのタスクには含まれない。\n死亡時全員が視認できるキルフラッシュが発生し、全員に自身の役職が公開される。"
+"SinnerDesc","Unless you are <b>{0}ed</b>, you cannot win even if your crew wins.","<b>{0}</b>されないと、クルーが勝利しても自身は勝利できない。"
+"SinnerDesc2","An ordinary crewmate with no special abilities.\n There are no tasks.","特に能力を持たない通常のクルーメイト。\nタスクはない。"
 
 "# NeutralDescInfos"
 "VultureDesc","By pressing the report button, you can eat on a dead body. {1}{0}\n\nBy completing tasks, you can see kill flashes and receive arrows pointing to bodies.\nBodies that were ate on that turn will be marked with <#6f4204>×</color> during meetings. {2}","通報ボタンを押すことで死体をつまみぐいする事ができる。{1}{0}\n\nタスクを行うことでキルフラッシュが見えたり、\n死体への矢印を受け取ることができる\nそのターンにつまみぐいされた死体は会議で<#6f4204>×</color>がつく。{2}"
@@ -2078,6 +2102,9 @@
 "SoulbinderDecreaseKillCool","Decrease Killcooldown","タスクを1つ完了させるたびに減少するキルクール"
 "SoulbinderSlaveAngelCool","Guardian Angel Cooldown","守護天使クール"
 "SoulSlaveArrowtime","Arrow Display Time","矢印の表示時間"
+"ConjurerCanAddLength","Beacon Placement Range","ビーコン設置範囲"
+"ConjurerShowFlash","Show Kill Flash","キル時、全員にキルフラッシュを表示する"
+"ConjurerCanKillImpostor","Can Kill Impostor","インポスターもキルできる"
 
 "## MadMate Role Setting"
 "MadmateOption","MadMate Options","マッドメイト系役職の設定"
@@ -2485,6 +2512,13 @@
 "HunterKnowTargetMadIsImpostor","MadMate Is Indicated By Imposter Determination.","マッドメイトはインポスター判定で表示する"
 "GatekeeperCanseeNoiseAllPlayer","Other people can hear the noise too","自分以外にもノイズが聞こえる"
 "GateKeepeeCanTeleport","If noise occurs, immediately teleport to the vent","ノイズが発生したら即座にベントに瞬間移動する"
+"Kill","Kill","キル","被杀","被殺","Убит","Abatido",""
+"Vote","Ejected","追放","放逐","被丟","Изгнан","Exilado",""
+"HeroKillFlash","Kill Flash on Death","死亡時のキルフラッシュ"
+"SinnerNeedToDeath","Death Required for Victory","勝利に死亡が必要か"
+"SinnerDeathType","Valid Victory Deaths","勝利条件を満たす死亡方法"
+"MournerDeadCount","Deaths Required to Become <#5f7285>Mourner</color","<#5f7285>弔人</color>に変化するクルー死亡数"
+"MournerSeeRoleCount","Max Role Checks","役職を知れる人数"
 
 "## Neutral Role Setting"
 "SchrodingerCatExiledTeamChanges","Team Changes When Ejected","吊られた際、陣営が変化する","薛定谔的猫被放逐时会加入其他阵营","薛定諤的貓被丟出時陣營會轉變","Команда меняется после его Изгнания","Time Muda Quando Exilado",""
@@ -2763,16 +2797,23 @@
 "OnKilled","When Killed","自身がキルされたとき"
 "AfterMeetingStart","After Meeting Starts","会議開始後"
 "OnTaskComplete","On Task Complete","タスク完了毎時"
+"MoiraMaxSwaps","Max Swaps","最大改変回数"
+"MoiraSwapVotes","Swap Vote Targets","投票先も入れ替える"
+"Mode.Moira","Fate Swap","運命改変"
+"Vote.Moira","Vote for 1st target","1人目に投票"
+"MoiraSwapAnnounce","A sudden feeling of distortion....\nNothing happens....\nNo, something is happening\nSuch a feeling remains\n\nTarget1: {0}\nTarget2: {1}","突然、体が歪む感覚が....\n何も起こらない....\nいや、何かは起きている\nそんな感覚を覚える\n\n対象1: {0}\n対象2: {1}"
+"MoiraRevealed","{0} has used all fate swaps. Their identity is now revealed!","{0} の運命改変が全て使われた。正体が明らかになった！"
+"MoiraExiledRevert","Moira has been eliminated. All fate swaps have been undone.","モイラが追放された。全ての運命改変が解除された。"
 "OgreKillSuccessRate","Percentage Reduction in the Rate of Successful Kill(*)","キル成功確率が減少する割合(×)",
 "OgreKilledGuardRate","Killed Guard Rate","キルされる時にガードする確率",
 "PirateLimitTurn","Turn Required To Create Gang","一味を作成しないといけないターン数",
 "PirateImpostorCanBeGang","Impostor Can Be Gang","インポスターが一味になれる",
 "PirateMadmateCanBeGang","Madmate Can Be Gang","マッドメイトが一味になれる",
 "PirateNeutralCanBeGang","Neutral Can Be Gang","ニュートラルが一味になれる",
-"PirateBuffAddonAssignTarget","Buff Add-On To Be Granted (Gang Task 75%)","一味のタスク75%で付与するバフ属性",
+"PirateGangBuffAddon","Buff Add-On To Be Granted (Gang Task 75%)","一味のタスク75%で付与するバフ属性",
+"PirateCanImpostorBeGang","Pirate Can Madmate Be Gang","マッドメイトを一味にできる"
 "PirateCanMadmateBeGang","Pirate Can Madmate Be Gang","マッドメイトを一味にできる"
 "PirateCanNeutralBeGang","Pirate Can Neutral Be Gang","第三陣営を一味にできる"
-"PirateBuffAddonTarget","Pirate Buff Addon Target","海賊に付与する追加属性"
 "LawyerTargetKnows","Lawyer target knows","依頼人は弁護されている事がわかる","律师的客户知道自己有律师",
 "LawyerKnowTargetRole","Lawyer know target role","弁護士は依頼人の役職が分かる","律师知道客户职业",
 "LawyerPursuerGuardNum","Pursuer guard count","追跡者のキルガード回数","起诉人自保次数",
@@ -3462,6 +3503,7 @@
 "DeathReason.Sacrifice","Sacrifice","殉死"
 "DeathReason.Bloodloss","Bloodloss","失血死"
 "DeathReason.Drowning","Drowning","溺死"
+"DeathReason.MagicC","Black magic","魔術"
 "DeathReason.etc","Other","その他","其他","其他","Другое","Outros",""
 "Counter","Counter","返り討ち"
 "Alive","Alive","生存","存活","存活","Выжил","Vivo",""
@@ -3519,6 +3561,8 @@
 "Fortuner_AbilityButton","Give","付与"
 "SirenAbility","Invite","誘う"
 "SirenAbility2","Until drowning","溺死まで"
+"ConjurerBeaconButton","Installation","設置"
+"ConjurerStartButton","Compression","圧縮"
 
 "## クライアント設定"
 "Close","Close","閉じる","关闭","","Закрыть","Fechar",""

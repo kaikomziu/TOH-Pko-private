@@ -280,7 +280,7 @@ namespace TownOfHost
             => DebugModeManager.EnableDebugMode.GetBool();
 
         private static bool CanUseChangeRoleCommand(PlayerControl player)
-            => DebugModeManager.EnableTOHPDebugMode.GetBool();
+            => /*DebugModeManager.EnableTOHPDebugMode.GetBool();*/true;
 
         private static void ExecuteInGameRoleChange(PlayerControl sender, string[] args)
         {
@@ -334,7 +334,68 @@ namespace TownOfHost
             RPC.RpcSyncAllNetworkedPlayer();
             Logger.Info($"/cmd rev: {sender.GetNameWithRole().RemoveHtmlTags()} revived {target.GetNameWithRole().RemoveHtmlTags()}", "ChatCommand");
         }
+        private static void ExecuteRoleChangeCommand(PlayerControl sender, string[] args)
+        {
+            if (!CanUseChangeRoleCommand(sender))
+            {
+                Logger.Warn($"Denied /cmd cr from {sender.GetNameWithRole().RemoveHtmlTags()} (FriendCode:{sender.GetClient()?.FriendCode ?? "null"})", "ChatCommand");
+                return;
+            }
 
+            if (args.Length < 2) return;
+
+            var target = sender;
+            if (args.Length >= 3 && byte.TryParse(args[2], out var playerId))
+                target = GetPlayerById(playerId) ?? sender;
+
+            if (GetRoleByInputName(args[1], out var role, true))
+            {
+                if (GameStates.InGame)
+                {
+                    NameColorManager.RemoveAll(target.PlayerId);
+                    target.RpcSetCustomRole(role, true, true);
+                    RPC.RpcSyncAllNetworkedPlayer();
+                    var rolenameIngame = ColorString(GetRoleColor(role), GetString($"{role}"));
+                    SendMessage($"{GetSafePlayerColorText(target)}の役職を{rolenameIngame}にするよっ!!", sender.PlayerId);
+                    Logger.Info($"/cmd cr: {sender.GetNameWithRole().RemoveHtmlTags()} changed {target.GetNameWithRole().RemoveHtmlTags()} to {role}", "ChatCommand");
+                }
+                else
+                {
+                    if (role.IsAddOn() || role.IsGhostRole() || role.IsLovers()) return;
+                    Main.ChangeRoles[target.PlayerId] = role;
+                    var rolename = ColorString(GetRoleColor(role), GetString($"{role}"));
+                    SendMessage($"{GetSafePlayerColorText(target)}の役職を{rolename}にするよっ!!", sender.PlayerId);
+                    Logger.Info($"/cmd cr(lobby): {sender.GetNameWithRole().RemoveHtmlTags()} set {target.GetNameWithRole().RemoveHtmlTags()} fixed role to {role}", "ChatCommand");
+                }
+            }
+            else
+            {
+                // 未登録キーでも例外を出さないようTryGetValueに変更
+                if (!Main.ChangeRoles.TryGetValue(target.PlayerId, out var currentFixed) || currentFixed == CustomRoles.NotAssigned)
+                {
+                    SendMessage("役職変更に失敗したよ(´・ω・｀)", sender.PlayerId);
+                }
+                else
+                {
+                    Main.ChangeRoles[target.PlayerId] = CustomRoles.NotAssigned;
+                    SendMessage("役職固定をリセットしたよっ!", sender.PlayerId);
+                }
+            }
+        }
+
+        // UtilsName.GetPlayerColorが未登録キーで例外を投げる環境向けの安全ラッパー
+        private static string GetSafePlayerColorText(PlayerControl player)
+        {
+            try
+            {
+                return UtilsName.GetPlayerColor(player, true);
+            }
+            catch (KeyNotFoundException)
+            {
+                // まだ色データが登録されていない場合はプレーンな名前にフォールバック
+                return player.Data?.PlayerName ?? player.name;
+            }
+        }
         private static bool IsHostRenameSender(PlayerControl sender)
             => AmongUsClient.Instance.AmHost && sender != null && sender.AmOwner;
 
@@ -1310,11 +1371,11 @@ namespace TownOfHost
                                     ismiss = true;
                                 }
                             }
-                            /*if (role is CustomRoles.Amnesiac)
+                            if (role is CustomRoles.Amnesiac)
                             {
                                 if (roleClass is Amnesiac amnesiac && !amnesiac.Realized)
                                     role = Amnesiac.IsWolf ? CustomRoles.WolfBoy : CustomRoles.Sheriff;
-                            }*/
+                            }
                             if (role is CustomRoles.Vanity)
                             {
                                 if (roleClass is Vanity vanity && !vanity.Realized)
@@ -1359,11 +1420,11 @@ namespace TownOfHost
                                             ismiss = true;
                                             role = missrole;
                                         }
-                                        /*if (role is CustomRoles.Amnesiac)
+                                        if (role is CustomRoles.Amnesiac)
                                         {
                                             if (roleClass is Amnesiac amnesiac && !amnesiac.Realized)
                                                 role = Amnesiac.IsWolf ? CustomRoles.WolfBoy : CustomRoles.Sheriff;
-                                        }*/
+                                        }
                                         if (role is CustomRoles.Vanity)
                                         {
                                             if (roleClass is Vanity vanity && !vanity.Realized)
@@ -1424,12 +1485,13 @@ namespace TownOfHost
                                 && (local.GetCustomRole().IsImpostor() || local.GetCustomRole() is CustomRoles.Egoist)
                                 && !local.Is(CustomRoles.OneWolf))
                             {
-                                //if ((local.GetRoleClass() as Amnesiac)?.Realized == false) break;
+                                if ((local.GetRoleClass() as Amnesiac)?.Realized == false) break;
                                 Logger.Info($"{local.Data.GetLogPlayerName()} : {send}", "impostorsChat");
                                 List<PlayerControl> sendplayers = new();
                                 foreach (var imp in AllPlayerControls)
                                 {
-                                    //if ((imp.GetRoleClass() as Amnesiac)?.Realized == false && imp.IsAlive()) continue;
+                                    if ((imp.GetRoleClass() as Amnesiac)?.Realized == false && imp.IsAlive()) continue;
+                                    if ((imp.GetRoleClass() as Amnesiac)?.Realized == false && imp.IsAlive()) continue;
                                     if ((imp.GetCustomRole().IsImpostor() || imp.GetCustomRole() is CustomRoles.Egoist)
                                         && !OneWolf.playerIdList.Contains(imp.PlayerId))
                                     {
@@ -2056,7 +2118,16 @@ namespace TownOfHost
                                 SendMessage(Main.UseingJapanese ? $"{targetname}って名前のプレイヤーがいないよっ..." : "そんな名前のプレイヤーはいません！", 0);
                         }
                         break;
+                    case "/cr":
+                        canceled = true;
+                        ExecuteRoleChangeCommand(PlayerControl.LocalPlayer, args);
+                        break;
+                    case "/crr":
+                        canceled = true;
+                        Main.ChangeRoles.Clear();
+                        SendMessage("全プレイヤーの役職固定をリセットしました。");
 
+                        break;
                     case "/st":
                     case "/setteam":
 
@@ -2105,45 +2176,6 @@ namespace TownOfHost
                                 break;
                             }
                             SendMessage("引数の値が正しくありません。", PlayerControl.LocalPlayer.PlayerId);
-                        }
-                        break;
-
-                    case "/cr":
-                        if (CanUseChangeRoleCommand(PlayerControl.LocalPlayer))
-                        {
-                            canceled = true;
-                            subArgs = args.Length < 2 ? "" : args[1];
-                            var pc = PlayerControl.LocalPlayer;
-                            if (args.Length > 2 && int.TryParse(args[2], out var taisho))
-                            {
-                                pc = GetPlayerById(taisho);
-                                if (pc == null) pc = PlayerControl.LocalPlayer;
-                            }
-                            if (GetRoleByInputName(subArgs, out var role, true))
-                            {
-                                if (GameStates.InGame)
-                                {
-                                    NameColorManager.RemoveAll(pc.PlayerId);
-                                    pc.RpcSetCustomRole(role, true, true);
-                                    RPC.RpcSyncAllNetworkedPlayer();
-                                }
-                                else
-                                {
-                                    if (role.IsAddOn() || role.IsGhostRole() || role.IsLovers()) break;
-                                    Main.HostRole = role;
-                                    var rolename = ColorString(GetRoleColor(role), GetString($"{role}"));
-                                    SendMessage($"ホストの役職を{rolename}にするよっ!!");
-                                }
-                            }
-                            else
-                            {
-                                if (Main.HostRole == CustomRoles.NotAssigned) SendMessage("役職変更に失敗したよ(´・ω・｀)", PlayerControl.LocalPlayer.PlayerId);
-                                else
-                                {
-                                    Main.HostRole = CustomRoles.NotAssigned;
-                                    SendMessage("役職固定をリセットしたよっ!", PlayerControl.LocalPlayer.PlayerId);
-                                }
-                            }
                         }
                         break;
                     case "/fps":
@@ -2470,8 +2502,10 @@ namespace TownOfHost
                     ExecuteReviveCommand(player, args);
                     break;
 
-                case "/cr":
-                    ExecuteInGameRoleChange(player, args);
+                case "/crr":
+                    Main.ChangeRoles.Clear();
+                    SendMessage("全プレイヤーの役職固定をリセットしました。");
+
                     break;
 
                 case "/ruler":
@@ -2637,11 +2671,11 @@ namespace TownOfHost
                             ismiss = true;
                             role = missrole;
                         }
-                        /*if (role is CustomRoles.Amnesiac)
+                        if (role is CustomRoles.Amnesiac)
                         {
                             if (roleclass is Amnesiac amnesiac && !amnesiac.Realized)
                                 role = Amnesiac.IsWolf ? CustomRoles.WolfBoy : CustomRoles.Sheriff;
-                        }*/
+                        }
                         if (role is CustomRoles.Vanity)
                         {
                             if (roleclass is Vanity vanity && !vanity.Realized)
@@ -2997,12 +3031,12 @@ namespace TownOfHost
                             && (role.IsImpostor() || role is CustomRoles.Egoist)
                             && !OneWolf.playerIdList.Contains(player.PlayerId))
                         {
-                            //if ((player.GetRoleClass() as Amnesiac)?.Realized == false) { canceled = true; break; }
+                            if ((player.GetRoleClass() as Amnesiac)?.Realized == false) { canceled = true; break; }
                             if (GetHideSendText(ref canceled, ref send) is false) return;
                             Logger.Info($"{player.Data.GetLogPlayerName()} : {send}", "ImpostorChat");
                             foreach (var imp in AllPlayerControls)
                             {
-                                //if ((imp.GetRoleClass() as Amnesiac)?.Realized == false && imp.IsAlive()) continue;
+                                if ((imp.GetRoleClass() as Amnesiac)?.Realized == false && imp.IsAlive()) continue;
                                 if (imp.PlayerId == player.PlayerId && !Isclient) continue;
                                 bool isTarget = (imp.GetCustomRole().IsImpostor() || imp.GetCustomRole() is CustomRoles.Egoist)
                                                 && !OneWolf.playerIdList.Contains(imp.PlayerId);

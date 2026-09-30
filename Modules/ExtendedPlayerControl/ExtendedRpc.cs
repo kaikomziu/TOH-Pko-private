@@ -36,12 +36,12 @@ namespace TownOfHost
             var roleClass = player.GetRoleClass();
             var roleInfo = role.GetRoleInfo();
             var beforeRole = player.GetCustomRole();
-            bool resetExpressSpeed = beforeRole == CustomRoles.Express && role != CustomRoles.Express;
-            if (beforeRole == CustomRoles.UltraStar && role != CustomRoles.UltraStar)
+            bool resetExpressSpeed = false;
+            if (beforeRole == CustomRoles.UltraStar || beforeRole == CustomRoles.Hitchhiker || beforeRole == CustomRoles.Express)
             {
                 resetExpressSpeed = true;
             }
-            if (role == CustomRoles.UltraStar || role == CustomRoles.Express)
+            if (role == CustomRoles.UltraStar || role == CustomRoles.Express || role == CustomRoles.Hitchhiker)
             {
                 resetExpressSpeed = false;
             }
@@ -475,6 +475,10 @@ namespace TownOfHost
             //自視点以外当たり判定が変わらないから霊界だと挙動不審になる。
             if (player == null) return;
 
+            if (player.GetCustomRole() is CustomRoles.Hero && Stray.OptHeroFlash.GetBool())
+            {
+                Utils.AllPlayerKillFlash();
+            }
             if (!Utils.IsRestriction())
             {
                 player.RpcExileV2();

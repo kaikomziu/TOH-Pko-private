@@ -22,7 +22,7 @@ public sealed class Lighthouse : RoleBase
             CustomRoles.Lighthouse,
             () => RoleTypes.Crewmate,
             CustomRoleTypes.Crewmate,
-            39400,
+            40700,
             SetupOptionItem,
             "lhk",
             "#ffd966",
