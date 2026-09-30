@@ -62,9 +62,9 @@ namespace TownOfHost
 
         public const string PluginGuid = "com.satokazoku.TownOfHost-Pko";
 
-        public const string BepInExPluginVersion = "1.3.3";
-        public const string PluginVersion = "1.3.3";//ほんとはx.y.z表記にしたかったけどx.y.z.km.ks表記だと警告だされる
-        public const string PluginShowVersion = "1.3.3";
+        public const string BepInExPluginVersion = "1.4.0";
+        public const string PluginVersion = "1.4.0";//ほんとはx.y.z表記にしたかったけどx.y.z.km.ks表記だと警告だされる
+        public const string PluginShowVersion = "1.4.0";
         public const string ModVersion = ".23.99";//リリースver用バージョン変更dc9b79
 
         /// 配布するデバッグ版なのであればtrue。リリース時にはfalseにすること。
@@ -471,6 +471,7 @@ namespace TownOfHost
         CupidLovers = CustomRoles.CupidLovers,
         OneLove = CustomRoles.OneLove,
         Executioner = CustomRoles.Executioner,
+        Bookmaker = CustomRoles.Bookmaker,
         Arsonist = CustomRoles.Arsonist,
         Egoist = CustomRoles.Egoist,
         Jackal = CustomRoles.Jackal,

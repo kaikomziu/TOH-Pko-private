@@ -5,6 +5,24 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-30 09:58 JST — v1.4.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加(TOH-P-P オリジナル役職)
+- **目撃者 (Witness)** / クルー(`Roles/Crewmate/Witness.cs`、ConfigId 37600)
+  - 自分の近く(設定距離内)でキルが起きると、次の会議開始時に「キラーの色が明るい色か暗い色か」を本人にだけ通知。カモフラージュ中は「分からない」
+  - 設定: 目撃できる距離(3、1〜6) / 被害者の名前も伝える(オン)
+- **カメラマン (Photographer)** / クルー(`Roles/Crewmate/Photographer.cs`、ConfigId 37900)
+  - ペットを撫でると、その瞬間に近くにいた生存者と撮影場所(部屋名)を記録。次の会議開始時に写真を公開
+  - 設定: クールダウン(15秒) / 撮影できる回数(3回) / 写る距離(3) / 写真を全員に公開する(オン、オフなら本人だけ)
+- **ブックメーカー (Bookmaker)** / 第三陣営(`Roles/Neutral/Bookmaker.cs`、ConfigId 57400)
+  - 会議で自投票→予想モード→次に投票した人を「追放される人」と予想(その票は数えない。予想後も普通に投票できる)
+  - 予想した人が実際に追放されると的中。規定回数的中で単独勝利(人数判定ではクルー側)
+  - 設定: 勝利に必要な的中回数(3回)
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に Witness / Photographer / Bookmaker を追加
+- `main.cs`: CustomWinner に Bookmaker を追加、バージョンを `1.3.3` → `1.4.0`
+- `Resources/string.csv`: 3役職の名前・説明・設定名・メッセージ(日本語/英語)を追加
+- `README.md`: 追加役職一覧を更新
+
 ## 2026-09-28 22:37 JST — v1.3.3(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 修正

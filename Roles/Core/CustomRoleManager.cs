@@ -1328,6 +1328,8 @@ public enum CustomRoles
     Hunter,
     //TOH-P-P
     Star,
+    Witness,
+    Photographer,
     //DEBUG only Crewmate
     Analyzer,
     //Neutral
@@ -1399,6 +1401,7 @@ public enum CustomRoles
     JackalWolf,
     //TOH-P-P
     JackalStar,
+    Bookmaker,
     TaskPlayerB,
     //TOH-P
     Chatter,

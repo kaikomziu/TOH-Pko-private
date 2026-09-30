@@ -7,7 +7,7 @@
 > - ビルド済みファイル(dll)は公開しません。GitHub Releases も使用しません。
 > - 公開ルームは建てられません(`Main.AllowPublicRoom = false`)。参加者には、使用中のModが TownOfHost-Pko の非公式プライベートフォークであることを必ず伝えてからゲームを開始してください。
 > - 変更履歴は [CHANGELOG.md](./CHANGELOG.md) を参照してください。
-> - このフォークで追加した役職: 潜伏者・口止め屋・マッドスター・ジャッカルスター(オリジナル)、スター([SuperNewRoles](https://github.com/SuperNewRoles/SuperNewRoles) より)
+> - このフォークで追加した役職: 潜伏者・口止め屋・マッドスター・ジャッカルスター・目撃者・カメラマン・ブックメーカー(オリジナル)、スター([SuperNewRoles](https://github.com/SuperNewRoles/SuperNewRoles) より)
 
 ---
 
