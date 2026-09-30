@@ -5,29 +5,31 @@ using UnityEngine;
 using TownOfHost.Modules;
 using TownOfHost.Patches;
 using TownOfHost.Roles.Core;
+using TownOfHost.Roles.Core.Interfaces;
 
 namespace TownOfHost.Roles.Crewmate;
 
 /// <summary>
 /// [TOH-P-P] ナイスサイエンティスト(SuperNewRoles より)【試作】
-/// ペットを撫でると、好きなタイミングで一定時間透明になれるクルー。
-/// クルーはファントムの「消える」を持てないため、部屋主が他の全員へ「消える/現れる」の通信を直接送って透明に見せる。
+/// 能力ボタン(ファントムの「消える」ボタン)で、好きなタイミングで一定時間透明になれるクルー。
+/// ボタンは本人の画面にだけファントムとして見せる方式(ナイスロガーと同じ)。他の人への透明化は、部屋主が「消える/現れる」の通信を直接送って見せる。
 /// MOD 未導入の端末で本当に消えて見えるかは要テスト。見えない場合は設定「ファントム役職を一時的に送る」をオンにして試す。
 /// </summary>
-public sealed class NiceScientist : RoleBase
+public sealed class NiceScientist : RoleBase, IKiller, IUsePhantomButton
 {
     public static readonly SimpleRoleInfo RoleInfo =
         SimpleRoleInfo.Create(
             typeof(NiceScientist),
             player => new NiceScientist(player),
             CustomRoles.NiceScientist,
-            () => RoleTypes.Crewmate,
+            () => RoleTypes.Phantom,
             CustomRoleTypes.Crewmate,
             40300,
             SetupOptionItem,
             "nsc",
             "#7fe0d0",
             (7, 7),
+            true,
             from: From.SuperNewRoles
         );
     public NiceScientist(PlayerControl player)
@@ -67,15 +69,27 @@ public sealed class NiceScientist : RoleBase
         OptionSendPhantomRole = BooleanOptionItem.Create(RoleInfo, 12, OptionName.NiceScientistSendPhantomRole, false, false);
     }
 
-    public override void Add() => PetActionManager.Register(Player.PlayerId, OnPet);
-    public override void OnDestroy() => PetActionManager.Unregister(Player.PlayerId);
-
-    private void OnPet()
+    // キル・ベント・サボタージュはできない(ボタンは透明化専用)
+    public bool CanUseKillButton() => false;
+    public bool CanUseImpostorVentButton() => false;
+    public bool CanUseSabotageButton() => false;
+    public float CalculateKillCooldown() => 0f;
+    public override void ApplyGameOptions(IGameOptions opt)
     {
+        opt.SetVision(false);
+        AURoleOptions.PhantomCooldown = Cooldown;
+    }
+    bool IUsePhantomButton.IsresetAfterKill => false;
+
+    public void OnClick(ref bool AdjustKillCooldown, ref bool? ResetCooldown)
+    {
+        AdjustKillCooldown = false;
+        ResetCooldown = false;
         if (!AmongUsClient.Instance.AmHost) return;
         if (!Player.IsAlive() || !GameStates.IsInTask || GameStates.IsMeeting) return;
         if (isInvisible) return;
-        if (Time.time - lastUseTime < Cooldown) return;
+        if (Time.time - lastUseTime < Cooldown - 0.5f) return;
+        ResetCooldown = true;
 
         lastUseTime = Time.time;
         SetInvisible(true);
