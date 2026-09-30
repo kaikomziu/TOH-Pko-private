@@ -5,6 +5,21 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-30 10:01 JST — v1.5.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加(TOH-P-P オリジナル役職)
+- **ナイスボタナー (NiceButtoner)** / クルー(`Roles/Crewmate/NiceButtoner.cs`、ConfigId 38300)
+  - ペットを撫でると、どこからでも緊急会議を開ける
+  - 設定: 使える回数(1回、1〜5) / クールダウン(20秒、タスクターン開始からの経過時間)
+- **イビルボタナー (EvilButtoner)** / インポスター(`Roles/Impostor/EvilButtoner.cs`、ConfigId 9700、ファントム基盤)
+  - ワンクリックボタンで、どこからでも緊急会議を開ける
+  - 設定: キルクール(30秒) / 使える回数(1回、1〜5) / クールダウン(20秒)
+- どちらもリアクター・酸素・停電・通信妨害などのサボタージュ中は使えない(ゴーストボタナーと同じ条件)
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に NiceButtoner / EvilButtoner を追加
+- `Resources/string.csv`: 2役職の名前・説明・設定名(日本語/英語)を追加
+- `README.md`: 追加役職一覧を更新
+- `main.cs`: バージョンを `1.4.0` → `1.5.0`
+
 ## 2026-09-30 09:58 JST — v1.4.0(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 追加(TOH-P-P オリジナル役職)

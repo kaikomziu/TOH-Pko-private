@@ -1206,6 +1206,7 @@ public enum CustomRoles
     //TOH-P-P
     Lurker,
     Silencer,
+    EvilButtoner,
     //DEBUG only Impostor
     //Madmate
     MadGuardian,
@@ -1330,6 +1331,7 @@ public enum CustomRoles
     Star,
     Witness,
     Photographer,
+    NiceButtoner,
     //DEBUG only Crewmate
     Analyzer,
     //Neutral
