@@ -5,6 +5,19 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-30 13:16 JST — v1.9.1(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加(試作)
+- **ナイスサイエンティスト (NiceScientist)** / クルー(`Roles/Crewmate/NiceScientist.cs`、ConfigId 40300、SuperNewRoles より)
+  - ペットを撫でると、好きなタイミングで一定時間透明になれる。会議開始・死亡で解除
+  - クルーはファントムの「消える」を持てないため、部屋主が自分以外の全員へ「消える/現れる」通信(StartVanish / StartAppear)を直接送る方式。部屋主の画面はその場で処理
+  - MOD 未導入端末で消えて見えるかは未確認。見えない場合の予備として設定「透明中にファントム役職を送る(テスト用)」を用意(オンにするとインポスター画面で一瞬仲間表示になる恐れあり)
+  - 設定: クールダウン(30秒) / 透明になれる時間(10秒) / 透明中にファントム役職を送る(オフ)
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に NiceScientist を追加
+- `Resources/string.csv`: 名前・説明・設定名(日本語/英語)を追加
+- `README.md`: 追加役職一覧を更新
+- `main.cs`: バージョンを `1.9.0` → `1.9.1`
+
 ## 2026-09-30 13:09 JST — v1.9.0(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 追加

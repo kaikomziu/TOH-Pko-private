@@ -1338,6 +1338,7 @@ public enum CustomRoles
     Lighthouse,
     Recorder,
     Paramedic,
+    NiceScientist,
     //DEBUG only Crewmate
     Analyzer,
     //Neutral
