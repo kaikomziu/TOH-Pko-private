@@ -5,6 +5,18 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-30 11:45 JST — v1.7.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加(TOH-P-P オリジナル役職)
+- **灯台守 (Lighthouse)** / クルー(`Roles/Crewmate/Lighthouse.cs`、ConfigId 39400)
+  - ペットを撫でると、その瞬間に近くにいた人全員(自分も含む・インポスターも対象)の視界が数秒間広がる。停電中にも効く。会議開始で解除
+  - 設定: クールダウン(20秒) / 視界が広がる時間(5秒) / 効果が届く距離(3) / 視界の倍率(2倍、1.25〜5、最大視界は5倍で頭打ち)
+  - `Modules/GameOptionsSender/PlayerGameOptionsSender.cs`: プレイヤーごとの視界設定の最後に灯台守のブーストを適用
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に Lighthouse を追加
+- `Resources/string.csv`: 名前・説明・設定名(日本語/英語)を追加
+- `README.md`: 追加役職一覧を更新
+- `main.cs`: バージョンを `1.6.0` → `1.7.0`
+
 ## 2026-09-30 11:27 JST — v1.6.0(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 追加(TOH-P-P オリジナル役職)

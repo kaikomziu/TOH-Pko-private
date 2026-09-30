@@ -385,6 +385,8 @@ namespace TownOfHost.Modules
 
             MeetingTimeManager.ApplyGameOptions(opt);
             Ruler.ApplyVisionRule(player, opt);
+            // [TOH-P-P] 灯台守の視界ブースト
+            Roles.Crewmate.Lighthouse.ApplyVisionBoost(player, opt);
 
             AURoleOptions.ShapeshifterCooldown = Mathf.Max(1f, AURoleOptions.ShapeshifterCooldown);
             AURoleOptions.PhantomCooldown = Mathf.Max(1f, AURoleOptions.PhantomCooldown);

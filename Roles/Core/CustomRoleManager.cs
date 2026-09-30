@@ -1334,6 +1334,7 @@ public enum CustomRoles
     Witness,
     Photographer,
     NiceButtoner,
+    Lighthouse,
     //DEBUG only Crewmate
     Analyzer,
     //Neutral
