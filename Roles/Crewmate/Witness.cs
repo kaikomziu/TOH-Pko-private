@@ -76,7 +76,7 @@ public sealed class Witness : RoleBase
         if (!Player.IsAlive() || Is(killer) || Is(target)) return;
         if (Vector2.Distance(Player.GetTruePosition(), target.GetTruePosition()) > Range) return;
 
-        var unknown = Camouflage.IsCamouflage || Camouflager.NowUse;
+        var unknown = Camouflage.IsCamouflage;
         var isLight = !unknown && IsLightColor(killer.CurrentOutfit.ColorId);
         sightings.Add((target.PlayerId, isLight, unknown));
         Logger.Info($"{Player.GetNameWithRole().RemoveHtmlTags()} がキルを目撃: 被害者 {target.GetNameWithRole().RemoveHtmlTags()} / {(unknown ? "不明" : isLight ? "明るい色" : "暗い色")}", "Witness");
