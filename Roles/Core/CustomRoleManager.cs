@@ -1209,6 +1209,7 @@ public enum CustomRoles
     EvilButtoner,
     Hyena,
     Binder,
+    EvilScientist,
     //DEBUG only Impostor
     //Madmate
     MadGuardian,

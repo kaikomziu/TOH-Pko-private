@@ -241,6 +241,9 @@ namespace TownOfHost
         {
             if (AmongUsClient.Instance.AmHost is false) return false;
 
+            // [TOH-P-P] イビルサイエンティストは本物のファントムと同じように透明化させる(ワンクリック処理にしない)
+            if (__instance.GetCustomRole() is CustomRoles.EvilScientist) return true;
+
             if (__instance.PlayerId == PlayerControl.LocalPlayer.PlayerId) return false;
 
             var AdjustKillCooldown = true;

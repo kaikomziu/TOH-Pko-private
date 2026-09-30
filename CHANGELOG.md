@@ -5,6 +5,18 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-30 13:09 JST — v1.9.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加
+- **イビルサイエンティスト (EvilScientist)** / インポスター(`Roles/Impostor/EvilScientist.cs`、ConfigId 11300、SuperNewRoles より、ファントム基盤)
+  - 能力ボタン(ファントムの「消える」)で、好きなタイミングで一定時間透明になれる。透明中はキル不可(Among Us のファントムの仕様)
+  - 設定: キルクール(30秒) / クールダウン(30秒) / 透明になれる時間(10秒、2.5〜60)
+  - `Patches/PlayerContorols/RoleAbilityPatch.cs`: ファントムボタンを「ワンクリック能力」として横取りする処理から、イビルサイエンティストだけ除外して本来の透明化を通す
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に EvilScientist を追加
+- `Resources/string.csv`: 名前・説明・設定名(日本語/英語)を追加
+- `README.md`: 追加役職一覧を更新
+- `main.cs`: バージョンを `1.8.0` → `1.9.0`
+
 ## 2026-09-30 12:58 JST — v1.8.0(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 追加(TOH-P-P オリジナル役職)
