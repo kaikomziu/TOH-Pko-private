@@ -5,6 +5,19 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-09-30 12:58 JST — v1.8.0(ベース: TownOfHost-Pko v5.37.23.99)
+
+### 追加(TOH-P-P オリジナル役職)
+- **記録係 (Recorder)** / クルー(`Roles/Crewmate/Recorder.cs`、ConfigId 39700)
+  - 会議の最初に、前のターンで死んだ人の「死んだ順番」だけが本人に届く(誰がキルしたかは分からない)。死者がいないターンは通知なし
+- **救急隊員 (Paramedic)** / クルー(`Roles/Crewmate/Paramedic.cs`、ConfigId 40000)
+  - 自分で死体を通報すると、その人が死んでからの経過時間が「25〜30秒」のような幅で本人に届く
+  - 設定: 時間の幅(5秒、1〜30)
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に Recorder / Paramedic を追加
+- `Resources/string.csv`: 2役職の名前・説明・設定名・メッセージ(日本語/英語)を追加
+- `README.md`: 追加役職一覧を更新
+- `main.cs`: バージョンを `1.7.0` → `1.8.0`
+
 ## 2026-09-30 11:45 JST — v1.7.0(ベース: TownOfHost-Pko v5.37.23.99)
 
 ### 追加(TOH-P-P オリジナル役職)

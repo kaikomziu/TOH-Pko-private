@@ -1335,6 +1335,8 @@ public enum CustomRoles
     Photographer,
     NiceButtoner,
     Lighthouse,
+    Recorder,
+    Paramedic,
     //DEBUG only Crewmate
     Analyzer,
     //Neutral
