@@ -55,6 +55,8 @@ public sealed class Bookmaker : RoleBase, ISelfVoter
     {
         OptionNeedHits = IntegerOptionItem.Create(RoleInfo, 10, OptionName.BookmakerNeedHits, new(1, 10, 1), 3, false)
             .SetValueFormat(OptionFormat.Times);
+        // 単独勝利の優先度(これが無いと勝利判定で弾かれる)
+        SoloWinOption.Create(RoleInfo, 11, defo: 1);
     }
     private void SendRPC()
     {

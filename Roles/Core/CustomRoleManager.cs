@@ -1417,6 +1417,7 @@ public enum CustomRoles
     //TOH-P-P
     JackalStar,
     Bookmaker,
+    DarkUdon,
     TaskPlayerB,
     //TOH-P
     Chatter,

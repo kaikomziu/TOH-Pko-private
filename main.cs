@@ -476,6 +476,7 @@ namespace TownOfHost
         OneLove = CustomRoles.OneLove,
         Executioner = CustomRoles.Executioner,
         Bookmaker = CustomRoles.Bookmaker,
+        DarkUdon = CustomRoles.DarkUdon,
         Arsonist = CustomRoles.Arsonist,
         Egoist = CustomRoles.Egoist,
         Jackal = CustomRoles.Jackal,
