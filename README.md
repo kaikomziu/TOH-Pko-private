@@ -1,12 +1,12 @@
-# Town Of Host-P-P(TownOfHost-Pko プライベートフォーク)
+# Town Of Host-P-P(TownOfHost-Pko 非公式フォーク)
 
 > [!Important]
-> **このリポジトリは [TownOfHost-Pko](https://github.com/satokazoku/TownOfHost-Pko) の非公式プライベートフォーク(身内専用)です。**
+> **このリポジトリは [TownOfHost-Pko](https://github.com/satokazoku/TownOfHost-Pko) の非公式フォークです。**
 > - フォーク元: https://github.com/satokazoku/TownOfHost-Pko
 > - TownOfHost-Pko 公式とは関係ありません。このフォークで起きた不具合をフォーク元(TOH-Pko)や本家 TOH / TOHK に報告しないでください。
-> - ソースコードは公開していますが、ビルド済みファイル(dll)は公開しません。GitHub Releases も使用しません。
+> - ビルド済みファイル(dll)は [Releases](https://github.com/kaikomziu/TOH-Pko-private/releases) で配布しています。導入方法は各リリースの説明を見てください。ライセンスはフォーク元と同じ GPL-3.0 です。
 > - 制作: かるわか。バグ報告等は、かるわかに直接言うか、このリポジトリの [Issues](https://github.com/kaikomziu/TOH-Pko-private/issues) からお願いします。
-> - 公開ルームは建てられません(`Main.AllowPublicRoom = false`)。参加者には、使用中のModが TownOfHost-Pko の非公式プライベートフォークであることを必ず伝えてからゲームを開始してください。
+> - 公開ルームは建てられません(`Main.AllowPublicRoom = false`)。参加者には、使用中のModが TownOfHost-Pko の非公式フォークであることを必ず伝えてからゲームを開始してください。
 > - 変更履歴は [CHANGELOG.md](./CHANGELOG.md) を参照してください。
 > - このフォークで追加した役職: 潜伏者・口止め屋・マッドスター・ジャッカルスター・目撃者・カメラマン・ブックメーカー・ナイスボタナー・イビルボタナー・ハイエナ・足止め屋・灯台守・記録係・救急隊員・闇のうどん屋(オリジナル)、スター・イビルサイエンティスト・ナイスサイエンティスト([SuperNewRoles](https://github.com/SuperNewRoles/SuperNewRoles) より)
 

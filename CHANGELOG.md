@@ -5,6 +5,13 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-10-25 16:41 JST — v1.11.3(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
+
+### 変更
+- **リポジトリを公開し、GitHub Releases で dll の配布を開始**(フォークガイドライン上のパブリックフォークになった)
+- ゲーム内・README の「非公式プライベートフォーク / Unofficial private fork」表記を「非公式フォーク / Unofficial fork」に変更
+- README に配布場所(Releases)とライセンス(GPL-3.0)を記載
+
 ## 2026-10-25 16:30 JST — v1.11.2(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
 
 ### 変更

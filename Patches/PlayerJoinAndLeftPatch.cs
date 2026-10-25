@@ -379,12 +379,12 @@ namespace TownOfHost
             if (Main.UseingJapanese)
             {
                 var text = $"これはかるわかが制作したTownOfHost-Pkoのフォーク版、<{Main.ModColor}><b>{Main.ModName}</b></color>です。\nバグ報告等は、かるわかに言うか、GitHubのissueからおねがいします。";
-                Utils.SendMessage(text, Sendto, $"<{Main.ModColor}>【This Room Use \"{Main.ModName}\" (Unofficial private fork of TownOfHost-Pko)】</color>");
+                Utils.SendMessage(text, Sendto, $"<{Main.ModColor}>【This Room Use \"{Main.ModName}\" (Unofficial fork of TownOfHost-Pko)】</color>");
             }
             else
             {
                 var text = $"This is <{Main.ModColor}><b>{Main.ModName}</b></color>, a fork of TownOfHost-Pko made by かるわか.\nPlease report bugs to かるわか or via GitHub issues.";
-                Utils.SendMessage(text, Sendto, $"<{Main.ModColor}>【This Room Use \"{Main.ModName}\" (Unofficial private fork of TownOfHost-Pko)】</color>");
+                Utils.SendMessage(text, Sendto, $"<{Main.ModColor}>【This Room Use \"{Main.ModName}\" (Unofficial fork of TownOfHost-Pko)】</color>");
             }
 
             if (Options.AutoDisplayLastResult.GetBool() && PlayerState.AllPlayerStates.Count != 0 && (Sendto == byte.MaxValue || Main.clientIdList.Contains(Sendto.GetPlayerControl()?.GetClientId() ?? -1)))
@@ -404,9 +404,9 @@ namespace TownOfHost
             if (Main.DebugVersion)
             {
                 if (Main.UseingJapanese)
-                    Utils.SendMessage($"<size=120%>☆これはデバッグ版です☆</size>\n<line-height=80%><size=70%>\n・正式リリース版ではありません。\n・バグが発生する場合があります。\n・これはTownOfHost-Pkoの非公式プライベートフォークです。\nバグはフォーク元(TOH-Pko)には報告せず、部屋主に伝えてください。", Sendto, "<#ff1919>【=====　これはデバッグ版です　=====】</color>");
+                    Utils.SendMessage($"<size=120%>☆これはデバッグ版です☆</size>\n<line-height=80%><size=70%>\n・正式リリース版ではありません。\n・バグが発生する場合があります。\n・これはTownOfHost-Pkoの非公式フォークです。\nバグはフォーク元(TOH-Pko)には報告せず、部屋主に伝えてください。", Sendto, "<#ff1919>【=====　これはデバッグ版です　=====】</color>");
                 else
-                    Utils.SendMessage($"<size=120%>☆This is a debug version☆</size=120%>\n<line-height=80%><size=70%>This is not an official release version. \n This is an unofficial private fork of TownOfHost-Pko.\nDo NOT report bugs to TOH-Pko; tell the host instead.", Sendto, "<#ff1919>【==　This is Debug version　==】</color>");
+                    Utils.SendMessage($"<size=120%>☆This is a debug version☆</size=120%>\n<line-height=80%><size=70%>This is not an official release version. \n This is an unofficial fork of TownOfHost-Pko.\nDo NOT report bugs to TOH-Pko; tell the host instead.", Sendto, "<#ff1919>【==　This is Debug version　==】</color>");
             }
         }
     }

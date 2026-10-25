@@ -99,7 +99,7 @@ namespace TownOfHost
                     Utils.SendMessage(string.Format(GetString("Message.TemplateNotFoundHost"), str, tags.Join(delimiter: ", ")), PlayerControl.LocalPlayer.PlayerId);
                 else Utils.SendMessage(string.Format(GetString("Message.TemplateNotFoundClient"), str), playerId);
             }
-            else for (int i = 0; i < sendList.Count; i++) Utils.SendMessage(ApplyReplaceDictionary(sendList[i]), playerId, str == "welcome" ? $"<{Main.ModColor}>【This Room Use \"{Main.ModName}\" (Unofficial private fork of TownOfHost-Pko)】" : "");
+            else for (int i = 0; i < sendList.Count; i++) Utils.SendMessage(ApplyReplaceDictionary(sendList[i]), playerId, str == "welcome" ? $"<{Main.ModColor}>【This Room Use \"{Main.ModName}\" (Unofficial fork of TownOfHost-Pko)】" : "");
         }
         public static string GetTemplate(string str = "")
         {
