@@ -14,10 +14,12 @@ namespace TownOfHost.Roles
         private static readonly int idStart = 500;
         class RandomAssignOptions
         {
-            public int Min => min();
+            public int Min => AssignMode == AssignAlgorithm.Exact ? exact() : min();
             private Func<int> min;
-            public int Max => max();
+            public int Max => AssignMode == AssignAlgorithm.Exact ? exact() : max();
             private Func<int> max;
+            // [TOH-P-P] 人数指定モード用(陣営ごとの確定人数)
+            private Func<int> exact;
 
             private RandomAssignOptions(int id, OptionItem parent, CustomRoleTypes roleTypes, int maxCount)
             {
@@ -42,16 +44,24 @@ namespace TownOfHost.Roles
 
                 var minOption = IntegerOptionItem.Create(idStart + id + 1, "RoleTypeMin", new(0, maxCount, 1), 0, TabGroup.MainSettings, false)
                     .SetParent(parent)
-                    .SetValueFormat(OptionFormat.Players);
+                    .SetValueFormat(OptionFormat.Players)
+                    .SetEnabled(() => AssignMode == AssignAlgorithm.Random);
                 var maxOption = IntegerOptionItem.Create(idStart + id + 2, "RoleTypeMax", new(0, maxCount, 1), 0, TabGroup.MainSettings, false)
                     .SetParent(parent)
-                    .SetValueFormat(OptionFormat.Players);
+                    .SetValueFormat(OptionFormat.Players)
+                    .SetEnabled(() => AssignMode == AssignAlgorithm.Random);
+                var exactOption = IntegerOptionItem.Create(idStart + id + 3, "RoleTypeExact", new(0, maxCount, 1), 0, TabGroup.MainSettings, false)
+                    .SetParent(parent)
+                    .SetValueFormat(OptionFormat.Players)
+                    .SetEnabled(() => AssignMode == AssignAlgorithm.Exact);
 
                 minOption.ReplacementDictionary =
-                maxOption.ReplacementDictionary = replacementDictionary;
+                maxOption.ReplacementDictionary =
+                exactOption.ReplacementDictionary = replacementDictionary;
 
                 min = () => minOption.GetInt();
                 max = () => maxOption.GetInt();
+                exact = () => exactOption.GetInt();
 
                 RandomAssignOptionsCollection.Add(roleTypes, this);
             }
@@ -63,12 +73,15 @@ namespace TownOfHost.Roles
         private enum AssignAlgorithm
         {
             Fixed,
-            Random
+            Random,
+            // [TOH-P-P] 陣営ごとに人数を確定で決める(内部的には最小=最大のランダムモード)
+            Exact
         }
         private static readonly string[] AssignModeSelections =
         {
             "AssignAlgorithm.Fixed",
-            "AssignAlgorithm.Random"
+            "AssignAlgorithm.Random",
+            "AssignAlgorithm.Exact"
         };
         private static CustomRoles[] AllMainRoles => GameModeManager.IsStandardClass() ? CustomRolesHelper.AllStandardRoles : CustomRolesHelper.AllHASRoles;
         public static OptionItem OptionAssignMode;
@@ -78,7 +91,7 @@ namespace TownOfHost.Roles
         private static Dictionary<CustomRoleTypes, int> AssignCount = new(CustomRolesHelper.AllRoleTypes.Length);
         private static List<CustomRoles> AssignRoleList = new(CustomRolesHelper.AllRoles.Length);
         private static bool UseCrewmateSlotForMadmateInRandom
-            => AssignMode == AssignAlgorithm.Random && OptionAssignMadmateFromCrewmateSlot?.GetBool() == true;
+            => AssignMode != AssignAlgorithm.Fixed && OptionAssignMadmateFromCrewmateSlot?.GetBool() == true;
         private static int MaxMadmateFromCrewmateSlotInRandom
             => OptionAssignMadmateFromCrewmateSlotMax?.GetInt() ?? 15;
 
@@ -138,7 +151,14 @@ namespace TownOfHost.Roles
 
             var min = impOptions.Min;
             var max = impOptions.Max;
-            if (min > max || min > numImpostors || max > numImpostors)
+            if (AssignMode == AssignAlgorithm.Exact && min != numImpostors)
+            {
+                var msg = string.Format(GetString("Warning.ExactImpostorCount"), min, numImpostors);
+                Logger.seeingame(msg);
+                Logger.Warn(msg, "BeginGame");
+                result = false;
+            }
+            else if (min > max || min > numImpostors || max > numImpostors)
             {
                 var msg = GetString("Warning.NotMatchImpostorCount");
                 Logger.seeingame(msg);
@@ -170,6 +190,7 @@ namespace TownOfHost.Roles
                     SetAddOnsList();
                     break;
                 case AssignAlgorithm.Random:
+                case AssignAlgorithm.Exact:
                     SetRandomAssignCount();
                     SetRandomAssignRoleList();
                     SetAddOnsList();
