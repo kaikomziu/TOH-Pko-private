@@ -155,7 +155,8 @@ namespace TownOfHost
                     {
                         Version version = Version.Parse(reader.ReadString());
                         string tag = reader.ReadString();
-                        string forkId = 3 <= version.Major ? reader.ReadString() : Main.OriginalForkId;
+                        // [TOH-P-P] 本フォークはv1.x系なので、メジャー番号ではなく残りデータの有無でForkIdを読むか判定する
+                        string forkId = reader.BytesRemaining > 0 ? reader.ReadString() : Main.OriginalForkId;
                         Main.playerVersion[__instance.PlayerId] = new PlayerVersion(version, tag, forkId);
                         if (GameStartManagerPatch.GameStartManagerUpdatePatch.MatchVersions(__instance.PlayerId))
                         {

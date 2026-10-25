@@ -5,6 +5,16 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-10-25 16:28 JST — v1.11.1(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
+
+### 修正
+- **部屋に入るとき「バージョンがホストと合致しません」と出て切断される不具合**(`Modules/RPC.cs`)
+  - バージョン確認RPCで、メジャー番号が3未満だとForkIdを読まずに本家のForkId扱いにしていたため、v1.x系の本フォーク同士でも不一致になっていた
+  - 残りデータの有無でForkIdを読むかどうか判定するように変更
+
+### その他(このPCのみ)
+- 多重起動用 `AmongUs-multi.bat` を作成し、ゲームの `Among Us_Data/boot.config` から `single-instance=` を削除(バックアップ: `boot.config.backup`)
+
 ## 2026-10-25 11:40 JST — v1.11.0(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
 
 ### 追加
