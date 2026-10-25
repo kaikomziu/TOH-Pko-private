@@ -5,6 +5,12 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-10-25 16:30 JST — v1.11.2(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
+
+### 変更
+- **部屋に入ったときのメッセージ**を「これはかるわかが制作したTownOfHost-Pkoのフォーク版、TownOfHost-P-Pです。バグ報告等は、かるわかに言うか、GitHubのissueからおねがいします。」に変更(英語版も同じ内容)(`Patches/PlayerJoinAndLeftPatch.cs`)
+  - 公開ルームでの勧誘禁止の文と、TOHKへの報告禁止の文は削除
+
 ## 2026-10-25 16:28 JST — v1.11.1(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
 
 ### 修正
