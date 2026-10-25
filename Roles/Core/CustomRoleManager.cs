@@ -1212,6 +1212,7 @@ public enum CustomRoles
     Hyena,
     Binder,
     EvilScientist,
+    LoneWolf,
     //DEBUG only Impostor
     //Madmate
     MadGuardian,
@@ -1345,6 +1346,8 @@ public enum CustomRoles
     Recorder,
     Paramedic,
     NiceScientist,
+    Pedometer,
+    ReverseTracer,
     //DEBUG only Crewmate
     Analyzer,
     //Neutral

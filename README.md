@@ -8,7 +8,7 @@
 > - 制作: かるわか。バグ報告等は、かるわかに直接言うか、このリポジトリの [Issues](https://github.com/kaikomziu/TOH-Pko-private/issues) からお願いします。
 > - 公開ルームは建てられません(`Main.AllowPublicRoom = false`)。参加者には、使用中のModが TownOfHost-Pko の非公式フォークであることを必ず伝えてからゲームを開始してください。
 > - 変更履歴は [CHANGELOG.md](./CHANGELOG.md) を参照してください。
-> - このフォークで追加した役職: 潜伏者・口止め屋・マッドスター・ジャッカルスター・目撃者・カメラマン・ブックメーカー・ナイスボタナー・イビルボタナー・ハイエナ・足止め屋・灯台守・記録係・救急隊員・闇のうどん屋(オリジナル)、スター・イビルサイエンティスト・ナイスサイエンティスト([SuperNewRoles](https://github.com/SuperNewRoles/SuperNewRoles) より)
+> - このフォークで追加した役職: 潜伏者・口止め屋・マッドスター・ジャッカルスター・目撃者・カメラマン・ブックメーカー・ナイスボタナー・イビルボタナー・ハイエナ・足止め屋・灯台守・記録係・救急隊員・闇のうどん屋・万歩計・逆探知・孤狼(オリジナル)、スター・イビルサイエンティスト・ナイスサイエンティスト([SuperNewRoles](https://github.com/SuperNewRoles/SuperNewRoles) より)
 
 ---
 

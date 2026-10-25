@@ -5,6 +5,18 @@ Town Of Host-P-P(TownOfHost-Pko の非公式プライベートフォーク・身
 
 ---
 
+## 2026-10-25 16:58 JST — v1.12.0(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
+
+### 追加
+- **万歩計**(クルー・`Roles/Crewmate/Pedometer.cs`・ConfigId 41000): 会議の最初に、前のターンで一番たくさん歩いた人と一番動かなかった人が自分にだけ分かる(ワープは数えない。「一番動かなかった人も分かる」設定あり)
+- **逆探知**(クルー・`Roles/Crewmate/ReverseTracer.cs`・ConfigId 41400): サボタージュが起きた瞬間、起こした人がいた部屋の名前が画面下に出る。会議の最初にもまとめて届く(ドア閉めは対象外。回数・使えるターンの設定あり)
+- **孤狼**(インポスター・`Roles/Impostor/LoneWolf.cs`・ConfigId 11600): 近くに誰もいないとキルクールが速く進み、2人以上いると止まる(倍率・距離の設定あり。合わせ直し時に本人の画面に盾エフェクト)
+- `Roles/Core/CustomRoleManager.cs`: CustomRoles に Pedometer / ReverseTracer / LoneWolf を追加
+- `Resources/string.csv`: 3役職の名前・説明・設定・メッセージを追加
+
+### 設定データ(このPCのみ)
+- プリセット1「闇鍋」に3役職を確率100%・1人で追加(変更前のバックアップを同じフォルダに保存)
+
 ## 2026-10-25 16:41 JST — v1.11.3(ベース: TownOfHost-Pko v5.37.23.99 + v19対応)
 
 ### 変更
